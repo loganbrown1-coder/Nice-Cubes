@@ -4,37 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nice Cubes — Ice is an ingredient.</title>
-<meta name="description" content="Nice Cubes treats ice as an ingredient, not an afterthought. Chilli Lime is the first flavour out. Join the waitlist for early access and a launch discount.">
+<meta name="description" content="Nice Cubes treats ice as an ingredient, not an afterthought. Four flavours are launching together. Join the waitlist for early access and a launch discount.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="announce">FOUNDING BATCH DISCOUNT FOR THE FIRST 200 ON THE LIST</div>
+<div class="announce">Founding batch discount for the first 200 on the list</div>
 
 <header class="nav">
-  <a class="nav__brand" href="#top">
-    <span class="dropzone dropzone--logo" data-hint="logo mark">
+  <a class="nav__brand" href="#">
+    <span class="dropzone dropzone--logo" data-hint="wordmark lockup PNG">
       <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload logo mark">
       <span class="dropzone__empty">
         <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3 6.5 3.6-6.5 3.6-6.5-3.6L12 4.3ZM5 9.1l6 3.3v7.1l-6-3.3V9.1Zm8 10.4v-7.1l6-3.3v7.1l-6 3.3Z"/></svg>
       </span>
     </span>
-    <span class="nav__wordmark">NICE CUBES</span>
+    <span class="nav__wordmark">Nice Cubes</span>
   </a>
-  <a class="btn btn--accent btn--sm" href="#waitlist">Join the List</a>
+  <nav class="nav__links">
+    <a class="btn btn--outline btn--sm" href="#buy">Buy Nice Cubes</a>
+    <a class="btn btn--outline btn--sm" href="#events">Nice Cubes Events</a>
+    <a class="btn btn--outline btn--sm" href="#apply">Become a Member</a>
+    <a class="btn btn--accent btn--sm" href="#join">Join the list</a>
+  </nav>
 </header>
 
-<main id="top">
+<main id="page-home">
 
   <section class="hero">
+    <span class="hero__watermark" aria-hidden="true">Nice</span>
     <div class="hero__text">
-      <p class="eyebrow">Pre‑Launch · Chilli Lime</p>
+      <p class="eyebrow">Pre&#8209;launch &middot; Four flavours</p>
       <h1 class="display">Why drink ice<br>when you can<br>drink nice.</h1>
-      <p class="lede">Nice Cubes treats ice as an ingredient, not an afterthought. Chilli Lime is the first flavour out: bold heat, bright citrus, zero dilution regret.</p>
-      <a class="btn btn--dark" href="#waitlist">Get Early Access</a>
+      <p class="lede">Nice Cubes treats ice as an ingredient, not an afterthought. Four flavours are launching together: bold heat, floral citrus, savoury herb, bright berry. Zero dilution regret.</p>
+      <a class="btn btn--dark" href="#join">Get Early Access</a>
     </div>
     <div class="hero__media">
       <span class="dropzone dropzone--tall" data-hint="chilli room with slogan.png">
@@ -48,9 +54,9 @@
     </div>
   </section>
 
-  <section class="waitlist" id="waitlist">
+  <section class="waitlist" id="join">
     <h2 class="h2 h2--onblack">Be first to know</h2>
-    <p class="waitlist__copy">Join the list for early access and a launch discount when Chilli Lime drops. No spam, just ice.</p>
+    <p class="waitlist__copy">Join the list for early access and a launch discount when our four flavours drop. No spam, just ice.</p>
 
     <form class="form" id="waitlist-form" novalidate>
       <div class="form__row">
@@ -89,58 +95,85 @@
         <li><span class="principles__num">02</span> Simplicity wins</li>
         <li><span class="principles__num">03</span> One colour leads</li>
       </ol>
-      <span class="dropzone dropzone--mini" data-hint="Black_on_Lime lockup">
+      <span class="dropzone dropzone--mini" data-hint="Black_on_Lime.png lockup">
         <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload alternate lockup">
         <span class="dropzone__empty">
           <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3 6.5 3.6-6.5 3.6-6.5-3.6L12 4.3ZM5 9.1l6 3.3v7.1l-6-3.3V9.1Zm8 10.4v-7.1l6-3.3v7.1l-6 3.3Z"/></svg>
-          <span class="dropzone__label">Black_on_Lime lockup</span>
+          <span class="dropzone__label">Black_on_Lime.png lockup</span>
           <span class="dropzone__browse">or browse files</span>
         </span>
       </span>
     </div>
   </section>
 
-  <section class="flavour">
-    <p class="eyebrow eyebrow--center">Debut Flavour</p>
-    <h2 class="display display--sm">Chilli Lime</h2>
-    <p class="lede lede--center">The debut flavour. Two ingredients doing all the work.</p>
+  <section class="flavours">
+    <h2 class="display display--sm">Four Flavours</h2>
+    <p class="lede lede--center">Launching together. Each one built on two or three ingredients doing all the work.</p>
 
-    <div class="swatches">
-      <div class="swatch">
-        <span class="swatch__dot swatch__dot--heat"></span>
-        <span class="swatch__label">Heat</span>
+    <div class="flavour-grid">
+      <div class="flavour-card">
+        <span class="dropzone dropzone--flavour" data-hint="chilli room no slogan.png">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Chilli and Lime image">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">chilli room no slogan.png</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
+        </span>
+        <div class="flavour-card__swatches">
+          <span class="flavour-dot" style="background:#C5341B;"></span>
+          <span class="flavour-dot" style="background:#C8F902;"></span>
+        </div>
+        <div class="flavour-card__name">Chilli &amp; Lime</div>
       </div>
-      <div class="swatch">
-        <span class="swatch__dot swatch__dot--zing"></span>
-        <span class="swatch__label">Zing</span>
-      </div>
-    </div>
 
-    <div class="gallery">
-      <span class="dropzone dropzone--square" data-hint="Chatgptchilli.png">
-        <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload flavour image 1">
-        <span class="dropzone__empty">
-          <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-          <span class="dropzone__label">Chatgptchilli.png</span>
-          <span class="dropzone__browse">or browse files</span>
+      <div class="flavour-card">
+        <span class="dropzone dropzone--flavour" data-hint="Elderflower, mint &amp; cucumber shot">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Elderflower, Mint and Cucumber image">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">Elderflower, mint &amp; cucumber shot</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
         </span>
-      </span>
-      <span class="dropzone dropzone--square" data-hint="chilli room no slogan.png">
-        <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload flavour image 2">
-        <span class="dropzone__empty">
-          <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-          <span class="dropzone__label">chilli room no slogan.png</span>
-          <span class="dropzone__browse">or browse files</span>
+        <div class="flavour-card__swatches">
+          <span class="flavour-dot" style="background:#E9E4C9;"></span>
+          <span class="flavour-dot" style="background:#7FAE86;"></span>
+        </div>
+        <div class="flavour-card__name">Elderflower, Mint &amp; Cucumber</div>
+      </div>
+
+      <div class="flavour-card">
+        <span class="dropzone dropzone--flavour" data-hint="Blood orange &amp; rosemary shot">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Blood Orange and Rosemary image">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">Blood orange &amp; rosemary shot</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
         </span>
-      </span>
-      <span class="dropzone dropzone--square" data-hint="Chilli room with reflection slogan.png">
-        <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload flavour image 3">
-        <span class="dropzone__empty">
-          <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-          <span class="dropzone__label">Chilli room with reflection slogan.png</span>
-          <span class="dropzone__browse">or browse files</span>
+        <div class="flavour-card__swatches">
+          <span class="flavour-dot" style="background:#D9622B;"></span>
+          <span class="flavour-dot" style="background:#4F5D3A;"></span>
+        </div>
+        <div class="flavour-card__name">Blood Orange &amp; Rosemary</div>
+      </div>
+
+      <div class="flavour-card">
+        <span class="dropzone dropzone--flavour" data-hint="Raspberry, lemon &amp; basil shot">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Raspberry, Lemon and Basil image">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">Raspberry, lemon &amp; basil shot</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
         </span>
-      </span>
+        <div class="flavour-card__swatches">
+          <span class="flavour-dot" style="background:#C93B62;"></span>
+          <span class="flavour-dot" style="background:#E9C94A;"></span>
+        </div>
+        <div class="flavour-card__name">Raspberry, Lemon &amp; Basil</div>
+      </div>
     </div>
   </section>
 
@@ -185,18 +218,83 @@
     </div>
   </section>
 
+  <footer class="footer">
+    <div class="footer__brand">
+      <span class="dropzone dropzone--wordmark" data-hint="OffWhite_on_Black wordmark">
+        <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload reversed wordmark">
+        <span class="dropzone__empty">
+          <span class="dropzone__label dropzone__label--sm">OffWhite_on_Black wordmark</span>
+          <span class="dropzone__browse">or browse files</span>
+        </span>
+      </span>
+      <p class="footer__copy">© 2026 Nice Cubes. Ice is an ingredient.</p>
+    </div>
+    <form class="footer__form" id="footer-form" novalidate>
+      <input class="footer__input" type="email" name="email" placeholder="Email address" required autocomplete="email" aria-label="Email address">
+      <button class="footer__btn" type="submit">Join</button>
+    </form>
+  </footer>
+
 </main>
 
-<footer class="footer">
-  <span class="dropzone dropzone--wordmark" data-hint="OffWhite_on_Black wordmark">
-    <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload reversed wordmark">
-    <span class="dropzone__empty">
-      <span class="dropzone__label dropzone__label--sm">OffWhite_on_Black wordmark</span>
-      <span class="dropzone__browse">or browse files</span>
-    </span>
-  </span>
-  <p class="footer__copy">© 2026 Nice Cubes. Ice is an ingredient.</p>
-</footer>
+<section class="subpage" id="page-buy" hidden>
+  <p class="eyebrow eyebrow--center">Shop</p>
+  <h1 class="subpage__title">Coming soon.</h1>
+  <p class="subpage__copy">Nice Cubes isn't for sale just yet. Join the waitlist and we'll email you the moment Chilli Lime is ready to order.</p>
+  <a class="btn btn--dark" href="#join">Join the waitlist</a>
+</section>
+
+<section class="subpage" id="page-events" hidden>
+  <p class="eyebrow eyebrow--center">Events</p>
+  <h1 class="subpage__title">Coming soon.</h1>
+  <p class="subpage__copy">Pop-ups, tastings, and Nice Cubes meetups are in the works. Details land here first.</p>
+  <a class="btn btn--dark" href="#join">Join the waitlist</a>
+</section>
+
+<section class="apply" id="page-apply" hidden>
+  <div class="apply__inner">
+    <p class="eyebrow eyebrow--center">Community</p>
+    <h2 class="h2 h2--center">Become a member</h2>
+    <p class="lede lede--center">Join the Nice Cubes community: first access, tastings, and a say in what we make next.</p>
+
+    <form class="form form--light" id="apply-form" novalidate>
+      <div class="form__row">
+        <label class="field">
+          <span class="field__label">First name</span>
+          <input class="field__input" type="text" name="firstName" placeholder="First name" required autocomplete="given-name">
+        </label>
+        <label class="field">
+          <span class="field__label">Last name</span>
+          <input class="field__input" type="text" name="lastName" placeholder="Last name" required autocomplete="family-name">
+        </label>
+      </div>
+      <label class="field field--full">
+        <span class="field__label">Email address</span>
+        <input class="field__input" type="email" name="email" placeholder="Email address" required autocomplete="email">
+      </label>
+      <div class="form__row">
+        <label class="field">
+          <span class="field__label">Phone number</span>
+          <input class="field__input" type="tel" name="phone" placeholder="Phone number" required autocomplete="tel">
+        </label>
+        <label class="field">
+          <span class="field__label">Postcode</span>
+          <input class="field__input" type="text" name="postcode" placeholder="Postcode" required autocomplete="postal-code">
+        </label>
+      </div>
+      <label class="field field--full">
+        <span class="field__label">Favourite ice flavour</span>
+        <input class="field__input" type="text" name="flavour" placeholder="Favourite ice flavour">
+      </label>
+      <label class="field field--full">
+        <span class="field__label">Suggestions for Nice Cubes</span>
+        <textarea class="field__input field__textarea" name="suggestion" rows="4" placeholder="Suggestions for Nice Cubes"></textarea>
+      </label>
+      <button class="btn btn--dark btn--block" type="submit">Submit Application</button>
+      <p class="form__note" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
 
 <script src="script.js"></script>
 </body>

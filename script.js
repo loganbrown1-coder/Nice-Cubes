@@ -44,8 +44,31 @@ document.querySelectorAll('.dropzone').forEach((zone) => {
   });
 });
 
-// --- Waitlist form -> Klaviyo ---
-// Fill these in from your Klaviyo account, then this form is fully live.
+// --- Page router: home / buy / events / apply, driven by the URL hash ---
+const PAGES = ['buy', 'events', 'apply'];
+
+function route() {
+  const hash = location.hash.replace('#', '');
+  const page = PAGES.includes(hash) ? hash : null;
+
+  document.getElementById('page-home').hidden = !!page;
+  PAGES.forEach((p) => {
+    document.getElementById(`page-${p}`).hidden = p !== page;
+  });
+
+  if (!page && hash === 'join') {
+    const target = document.getElementById('join');
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    window.scrollTo(0, 0);
+  }
+}
+
+window.addEventListener('hashchange', route);
+route();
+
+// --- Waitlist forms -> Klaviyo ---
+// Fill these in from your Klaviyo account, then both forms below go live.
 //   KLAVIYO_COMPANY_ID: Account > Settings > API Keys > "Public API Key" (6 characters)
 //   KLAVIYO_LIST_ID:    Lists & Segments > open your waitlist list > the ID in the URL
 // This uses Klaviyo's public Client API, which is designed to be called straight
@@ -53,17 +76,14 @@ document.querySelectorAll('.dropzone').forEach((zone) => {
 const KLAVIYO_COMPANY_ID = 'YOUR_PUBLIC_API_KEY';
 const KLAVIYO_LIST_ID = 'YOUR_LIST_ID';
 const KLAVIYO_REVISION = '2026-07-15';
+const KLAVIYO_CONFIGURED = KLAVIYO_COMPANY_ID !== 'YOUR_PUBLIC_API_KEY' && KLAVIYO_LIST_ID !== 'YOUR_LIST_ID';
 
-const form = document.getElementById('waitlist-form');
-const note = form.querySelector('.form__note');
-const submitBtn = form.querySelector('button[type="submit"]');
-
-function setNote(text, isError) {
+function setNote(note, text, isError) {
   note.textContent = text;
   note.classList.toggle('form__note--error', !!isError);
 }
 
-async function subscribeToKlaviyo({ email, firstName, lastName }) {
+async function subscribeToKlaviyo({ email, firstName, lastName }, source) {
   const res = await fetch(
     `https://a.klaviyo.com/client/subscriptions?company_id=${KLAVIYO_COMPANY_ID}`,
     {
@@ -76,7 +96,7 @@ async function subscribeToKlaviyo({ email, firstName, lastName }) {
         data: {
           type: 'subscription',
           attributes: {
-            custom_source: 'Nice Cubes waitlist form',
+            custom_source: source,
             profile: {
               data: {
                 type: 'profile',
@@ -106,6 +126,11 @@ async function subscribeToKlaviyo({ email, firstName, lastName }) {
   }
 }
 
+// Main waitlist form (hero + #join section)
+const form = document.getElementById('waitlist-form');
+const note = form.querySelector('.form__note');
+const submitBtn = form.querySelector('button[type="submit"]');
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -113,32 +138,89 @@ form.addEventListener('submit', async (e) => {
   inputs.forEach((el) => el.classList.add('touched'));
 
   if (!form.checkValidity()) {
-    setNote('Please fill in all fields with a valid email.', true);
+    setNote(note, 'Please fill in all fields with a valid email.', true);
     return;
   }
 
   const data = Object.fromEntries(new FormData(form).entries());
 
-  if (KLAVIYO_COMPANY_ID === 'YOUR_PUBLIC_API_KEY' || KLAVIYO_LIST_ID === 'YOUR_LIST_ID') {
+  if (!KLAVIYO_CONFIGURED) {
     console.warn('Klaviyo not configured yet — set KLAVIYO_COMPANY_ID and KLAVIYO_LIST_ID in script.js.');
-    setNote(`Thanks ${data.firstName}, you're on the list. (Klaviyo not yet connected — see script.js)`, false);
+    setNote(note, `Thanks ${data.firstName}, you're on the list. (Klaviyo not yet connected — see script.js)`, false);
     form.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
     return;
   }
 
   submitBtn.disabled = true;
-  setNote('Joining…', false);
+  setNote(note, 'Joining…', false);
 
   try {
-    await subscribeToKlaviyo({ email: data.email, firstName: data.firstName, lastName: data.lastName });
-    setNote(`Thanks ${data.firstName}, you're on the list.`, false);
+    await subscribeToKlaviyo({ email: data.email, firstName: data.firstName, lastName: data.lastName }, 'Nice Cubes waitlist form');
+    setNote(note, `Thanks ${data.firstName}, you're on the list.`, false);
     form.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
   } catch (err) {
     console.error(err);
-    setNote('Something went wrong — please try again.', true);
+    setNote(note, 'Something went wrong — please try again.', true);
   } finally {
     submitBtn.disabled = false;
   }
+});
+
+// Footer newsletter form (email only)
+const footerForm = document.getElementById('footer-form');
+const footerBtn = footerForm.querySelector('.footer__btn');
+const footerBtnDefaultLabel = footerBtn.textContent;
+
+footerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!footerForm.checkValidity()) return;
+
+  const email = new FormData(footerForm).get('email');
+
+  if (!KLAVIYO_CONFIGURED) {
+    console.warn('Klaviyo not configured yet — set KLAVIYO_COMPANY_ID and KLAVIYO_LIST_ID in script.js.');
+    footerBtn.textContent = "You're in";
+    footerForm.reset();
+    return;
+  }
+
+  footerBtn.disabled = true;
+  try {
+    await subscribeToKlaviyo({ email, firstName: '', lastName: '' }, 'Nice Cubes footer form');
+    footerBtn.textContent = "You're in";
+    footerForm.reset();
+  } catch (err) {
+    console.error(err);
+    footerBtn.textContent = 'Try again';
+    setTimeout(() => { footerBtn.textContent = footerBtnDefaultLabel; }, 2500);
+  } finally {
+    footerBtn.disabled = false;
+  }
+});
+
+// --- Become a Member application (local only — not wired to a backend yet) ---
+const applyForm = document.getElementById('apply-form');
+const applyNote = applyForm.querySelector('.form__note');
+const applySubmitBtn = applyForm.querySelector('button[type="submit"]');
+
+applyForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const inputs = [...applyForm.querySelectorAll('.field__input')];
+  inputs.forEach((el) => el.classList.add('touched'));
+
+  if (!applyForm.checkValidity()) {
+    setNote(applyNote, 'Please fill in the required fields with a valid email.', true);
+    return;
+  }
+
+  const data = Object.fromEntries(new FormData(applyForm).entries());
+  console.log('Membership application (wire this to a real endpoint):', data);
+
+  setNote(applyNote, 'Application received. Welcome to the community — we’ll be in touch.', false);
+  applySubmitBtn.disabled = true;
+  applyForm.reset();
+  inputs.forEach((el) => el.classList.remove('touched'));
 });
