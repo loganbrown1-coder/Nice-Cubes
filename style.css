@@ -444,6 +444,85 @@ img { max-width: 100%; display: block; }
   margin: 0 0 2rem;
 }
 
+/* Events */
+.event { padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 4vw, 3rem); }
+.event__inner { max-width: var(--maxw); margin: 0 auto; }
+
+.display--event { font-size: clamp(2.5rem, 6.5vw, 4.75rem); margin-bottom: 0.6rem; }
+
+.event__layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.event__tagline {
+  font-weight: 700;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0 0 1.75rem;
+}
+
+.event__meta {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.event__meta li { font-size: 0.95rem; font-weight: 600; }
+
+.event__meta-label {
+  display: inline-block;
+  min-width: 92px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.event__cue { font-weight: 700; margin: 0 0 2rem; }
+
+.btn--lg { padding: 1.1rem 2.2rem; font-size: 0.95rem; }
+
+.event__card {
+  background: var(--ink);
+  color: var(--on-dark);
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  position: sticky;
+  top: 6rem;
+}
+
+.event__card-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.85rem;
+}
+
+.event__card-row {
+  font-size: 0.9rem;
+  color: var(--on-dark-muted);
+  margin-bottom: 0.4rem;
+}
+
+.event__card .btn { margin-top: 1.25rem; width: 100%; }
+
+.event__card-note {
+  font-size: 0.72rem;
+  color: var(--on-dark-label);
+  margin-top: 0.85rem;
+  text-align: center;
+}
+
 /* Become a Member */
 .apply {
   padding: clamp(4rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem);
@@ -474,6 +553,7 @@ img { max-width: 100%; display: block; }
 .dropzone--tall { aspect-ratio: 4 / 5; }
 .dropzone--square { aspect-ratio: 1 / 1; }
 .dropzone--flavour { aspect-ratio: 1 / 1; margin-bottom: 0; }
+.dropzone--banner { aspect-ratio: 2.4 / 1; margin-bottom: clamp(2rem, 5vw, 3rem); }
 
 .dropzone--logo {
   width: 34px;
@@ -582,6 +662,8 @@ img { max-width: 100%; display: block; }
   .hero__media { order: -1; }
   .hero__watermark { display: none; }
   .ingredient { grid-template-columns: 1fr; }
+  .event__layout { grid-template-columns: 1fr; }
+  .event__card { position: static; }
   .form__row { grid-template-columns: 1fr; }
   .flavour-grid { grid-template-columns: repeat(2, 1fr); }
   .follow__grid { grid-template-columns: repeat(2, 1fr); }
