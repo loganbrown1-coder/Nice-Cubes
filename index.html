@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -72,14 +72,7 @@
   </section>
 
   <section class="ingredient">
-    <span class="dropzone dropzone--square" data-hint="Ice in Room.png">
-      <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload ingredient image">
-      <span class="dropzone__empty">
-        <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-        <span class="dropzone__label">Drop: Ice in Room.png</span>
-        <span class="dropzone__browse">or browse files</span>
-      </span>
-    </span>
+    <img class="ingredient__img" src="images/ingredient-cucumber-mint-box.webp" alt="Nice Cubes Cucumber &amp; Mint flavoured ice cubes box, with three ice cubes containing cucumber and mint">
     <div class="ingredient__text">
       <h2 class="h2">Ice is an ingredient.</h2>
       <p class="lede">Most ice is an afterthought, a diluting inconvenience at the bottom of the glass. We started Nice Cubes to make ice something you actually notice: clean flavour, considered design, built to be photographed, shared, and remembered.</p>
@@ -99,7 +92,7 @@
     </div>
   </section>
 
-  <section class="flavours">
+  <section class="flavours" hidden>
     <h2 class="display display--sm">Four Flavours</h2>
     <p class="lede lede--center">Launching together. Each one built on two or three ingredients doing all the work.</p>
 
@@ -121,7 +114,14 @@
       </div>
 
       <div class="flavour-card">
-        <img class="flavour-card__img" src="images/flavour-cucumber-mint-box.webp" alt="Nice Cubes Cucumber &amp; Mint flavoured ice cubes box, with three ice cubes containing cucumber and mint" loading="lazy">
+        <span class="dropzone dropzone--flavour" data-hint="Elderflower, mint &amp; cucumber shot">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Elderflower, Mint and Cucumber image">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">Elderflower, mint &amp; cucumber shot</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
+        </span>
         <div class="flavour-card__swatches">
           <span class="flavour-dot" style="background:#E9E4C9;"></span>
           <span class="flavour-dot" style="background:#7FAE86;"></span>
@@ -163,12 +163,12 @@
     </div>
   </section>
 
-  <section class="follow">
+  <section class="follow follow--simple">
     <div class="follow__head">
       <h2 class="h2">Follow along</h2>
-      <a class="follow__handle" href="https://instagram.com/nicecubes" target="_blank" rel="noopener">@nicecubes</a>
+      <a class="follow__handle" href="https://www.instagram.com/drinknicecubes/" target="_blank" rel="noopener">@drinknicecubes</a>
     </div>
-    <div class="follow__grid">
+    <div class="follow__grid" hidden>
       <span class="dropzone dropzone--square" data-hint="Instagram">
         <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Instagram post 1">
         <span class="dropzone__empty">
