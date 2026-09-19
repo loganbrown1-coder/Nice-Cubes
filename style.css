@@ -319,6 +319,14 @@ img { max-width: 100%; display: block; }
   text-align: left;
 }
 
+.flavour-card__img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
 .flavour-card__swatches {
   display: flex;
   gap: 0.5rem;
@@ -558,7 +566,7 @@ img { max-width: 100%; display: block; }
 
 .dropzone--tall { aspect-ratio: 4 / 5; }
 .dropzone--square { aspect-ratio: 1 / 1; }
-.dropzone--flavour { aspect-ratio: 1 / 1; margin-bottom: 0; }
+.dropzone--flavour { aspect-ratio: 4 / 5; margin-bottom: 0; }
 .dropzone--banner { aspect-ratio: 3.2 / 1; margin-bottom: clamp(2rem, 5vw, 3rem); }
 .dropzone--banner .dropzone__img { object-fit: contain; background: var(--cream-alt); }
 
