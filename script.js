@@ -73,7 +73,7 @@ route();
 //   KLAVIYO_LIST_ID:    Lists & Segments > open your waitlist list > the ID in the URL
 // This uses Klaviyo's public Client API, which is designed to be called straight
 // from the browser with the public key only — never put a private API key here.
-const KLAVIYO_COMPANY_ID = 'YOUR_PUBLIC_API_KEY';
+const KLAVIYO_COMPANY_ID = 'W6Nwiq';
 const KLAVIYO_LIST_ID = 'YOUR_LIST_ID';
 const KLAVIYO_REVISION = '2026-07-15';
 const KLAVIYO_CONFIGURED = KLAVIYO_COMPANY_ID !== 'YOUR_PUBLIC_API_KEY' && KLAVIYO_LIST_ID !== 'YOUR_LIST_ID';
