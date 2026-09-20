@@ -162,6 +162,13 @@ img { max-width: 100%; display: block; }
 }
 .btn--outline:hover { background: var(--ink); color: var(--cream); }
 
+.btn--outline-light {
+  background: transparent;
+  color: var(--on-dark);
+  border: 1px solid var(--on-dark-line);
+}
+.btn--outline-light:hover { background: var(--on-dark); color: var(--ink); }
+
 .btn--sm { padding: 0.55rem 1rem; font-size: 0.72rem; }
 
 .btn--block { width: 100%; }
@@ -669,6 +676,14 @@ img { max-width: 100%; display: block; }
   line-height: 1;
   text-transform: uppercase;
 }
+
+.event__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.event__card-soldout .btn + .btn { margin-top: 0.6rem; }
 
 .event__soldout-copy {
   margin: 0 0 1.25rem;
