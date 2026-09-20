@@ -284,6 +284,27 @@ img { max-width: 100%; display: block; }
 .field__input::placeholder { color: rgba(240, 237, 227, 0.4); }
 .field__input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .field__input:invalid.touched { border-color: #d97070; }
+.form--light .field__input:invalid.touched { border-color: #b0361a; }
+
+/* Dropdown */
+.form--light select.field__input {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.75rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%230f0e0d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px 8px;
+}
+.form--light select.field__input:required:invalid { color: rgba(15, 14, 13, 0.4); }
+.form--light select.field__input option { color: var(--ink); }
+
+.form__required {
+  margin: 0.25rem 0 1rem;
+  font-size: 0.78rem;
+  color: var(--muted-2);
+}
 
 /* Light-theme form (Become a Member) */
 .form--light .field__label { color: var(--muted-2); }

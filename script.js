@@ -385,6 +385,10 @@ function updateMemberCard() {
 }
 
 document.getElementById('apply-form').addEventListener('input', updateMemberCard);
+// clear the "only spaces" flag as soon as someone types again
+document.getElementById('apply-form').addEventListener('input', (e) => {
+  if (e.target.setCustomValidity) e.target.setCustomValidity('');
+});
 
 // --- Become a Member application -> same Klaviyo list, tagged so members can be segmented ---
 // In Klaviyo, filter on the custom property "member_application" (is true), or on the
@@ -397,10 +401,16 @@ applyForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const inputs = [...applyForm.querySelectorAll('.field__input')];
-  inputs.forEach((el) => el.classList.add('touched'));
+  inputs.forEach((el) => {
+    el.classList.add('touched');
+    // a field of only spaces counts as empty
+    if (el.tagName !== 'SELECT') el.setCustomValidity(el.value.trim() ? '' : 'Please fill this in.');
+  });
 
   if (!applyForm.checkValidity()) {
-    setNote(applyNote, 'Please fill in the required fields with a valid email.', true);
+    setNote(applyNote, 'Please fill in every field, with a valid email address.', true);
+    const firstBad = inputs.find((el) => !el.checkValidity());
+    if (firstBad) firstBad.focus();
     return;
   }
 

@@ -23,7 +23,7 @@
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css?v=30">
+<link rel="stylesheet" href="/style.css?v=31">
 </head>
 <body>
 
@@ -321,12 +321,19 @@
       </div>
       <label class="field field--full">
         <span class="field__label">Favourite ice flavour</span>
-        <input class="field__input" type="text" name="flavour" placeholder="Favourite ice flavour">
+        <select class="field__input" name="flavour" required>
+          <option value="" disabled selected>Choose your favourite</option>
+          <option>Chilli &amp; Lime</option>
+          <option>Elderflower, Mint &amp; Cucumber</option>
+          <option>Blood Orange &amp; Rosemary</option>
+          <option>Raspberry, Lemon &amp; Basil</option>
+        </select>
       </label>
       <label class="field field--full">
         <span class="field__label">Suggestions for Nice Cubes</span>
-        <textarea class="field__input field__textarea" name="suggestion" rows="4" placeholder="Suggestions for Nice Cubes"></textarea>
+        <textarea class="field__input field__textarea" name="suggestion" rows="4" placeholder="Suggestions for Nice Cubes" required></textarea>
       </label>
+      <p class="form__required">All fields are required.</p>
       <button class="btn btn--dark btn--block" type="submit">Submit Application</button>
       <p class="form__consent">By submitting, you agree to receive emails from Nice Cubes about the community, tastings and launches. Unsubscribe any time.</p>
       <p class="form__note" role="status" aria-live="polite"></p>
@@ -335,6 +342,6 @@
   </div>
 </section>
 
-<script src="/script.js?v=13"></script>
+<script src="/script.js?v=14"></script>
 </body>
 </html>
