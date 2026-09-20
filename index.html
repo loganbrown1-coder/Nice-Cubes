@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nice Cubes — Ice is an ingredient.</title>
+<title>Nice Cubes | Ice is an ingredient.</title>
 <meta name="description" content="Nice Cubes treats ice as an ingredient, not an afterthought. Four flavours are launching together. Join the waitlist for early access and a launch discount.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<link rel="stylesheet" href="style.css?v=17">
+<link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
 
@@ -190,9 +190,12 @@
   <a class="btn btn--dark" href="#join">Join the waitlist</a>
 </section>
 
-<section class="event" id="page-events" hidden>
+<section class="event" id="page-events" data-sold-out hidden>
   <div class="event__inner">
-    <img class="event__banner" src="images/supper-club-banner.webp" alt="Nice Cubes Supper Club poster. Food by Oliver Wilson, 3rd October, 6:30 to 11pm, East London. Good drinks, better ice. Seasonal fine dining. A space worth saving." loading="lazy" decoding="async">
+    <div class="event__banner-wrap">
+      <img class="event__banner" src="images/supper-club-banner.webp" alt="Nice Cubes Supper Club poster. Food by Oliver Wilson, 3rd October, 6:30 to 11pm, East London. Good drinks, better ice. Seasonal fine dining. A space worth saving." loading="lazy" decoding="async">
+      <span class="event__stamp" aria-hidden="true">Sold out</span>
+    </div>
 
     <div class="event__layout">
       <div class="event__body">
@@ -202,23 +205,37 @@
 
         <ul class="event__meta">
           <li><span class="event__meta-label">Date</span>Saturday 3rd October 2026</li>
-          <li><span class="event__meta-label">Time</span>6:30pm &ndash; 11:00pm</li>
+          <li><span class="event__meta-label">Time</span>6:30pm to 11:00pm</li>
           <li><span class="event__meta-label">Location</span>Palm 2, Lower Clapton Rd, East London E5&nbsp;0QJ</li>
         </ul>
 
-        <p class="lede">An evening of amazing food, quality drinks and fabulous ice. We&rsquo;re bringing Nice Cubes to the world for an intimate supper &mdash; food by Oliver Wilson and friends.</p>
+        <p class="lede">An evening of amazing food, quality drinks and fabulous ice. We&rsquo;re bringing Nice Cubes to the world for an intimate supper, with food by Oliver Wilson and friends.</p>
         <p class="lede">Expect a seasonal menu, long&#8209;table dining, carefully made drinks, flavoured ice, and a room full of nice people.</p>
         <p class="event__cue">Come playful. Bring a little spice.</p>
 
-        <a class="btn btn--accent btn--lg" href="https://www.tickettailor.com/events/nicecubes/2355567" target="_blank" rel="noopener">Get Tickets</a>
+        <div class="event__tickets">
+          <a class="btn btn--accent btn--lg" href="https://www.tickettailor.com/events/nicecubes/2355567" target="_blank" rel="noopener">Get Tickets</a>
+        </div>
+
+        <div class="event__soldout" role="status">
+          <p class="event__soldout-title">Sold out. Nice one.</p>
+          <p class="event__soldout-copy">Every seat is taken and we&rsquo;re having a bit of a meltdown. Join the list and you&rsquo;ll be first to hear about the next supper.</p>
+          <a class="btn btn--dark" href="#join">Join the list</a>
+        </div>
       </div>
 
       <aside class="event__card">
         <div class="event__card-title">A Nice Cubes Supper</div>
-        <div class="event__card-row">Sat 3 Oct 2026 &middot; 6:30&ndash;11:00pm</div>
+        <div class="event__card-row">Sat 3 Oct 2026 &middot; 6:30 to 11:00pm</div>
         <div class="event__card-row">Palm 2, E5 0QJ &middot; East London</div>
-        <a class="btn btn--dark btn--block" href="https://www.tickettailor.com/events/nicecubes/2355567" target="_blank" rel="noopener">Buy Tickets</a>
-        <div class="event__card-note">Tickets &amp; booking handled securely by Ticket&nbsp;Tailor.</div>
+        <div class="event__tickets">
+          <a class="btn btn--dark btn--block" href="https://www.tickettailor.com/events/nicecubes/2355567" target="_blank" rel="noopener">Buy Tickets</a>
+          <div class="event__card-note">Tickets &amp; booking handled securely by Ticket&nbsp;Tailor.</div>
+        </div>
+        <div class="event__card-soldout">
+          <span class="event__badge">Sold out</span>
+          <a class="btn btn--accent btn--block" href="#join">Join the list for the next one</a>
+        </div>
       </aside>
     </div>
   </div>
@@ -270,6 +287,6 @@
   </div>
 </section>
 
-<script src="script.js?v=7"></script>
+<script src="script.js?v=8"></script>
 </body>
 </html>

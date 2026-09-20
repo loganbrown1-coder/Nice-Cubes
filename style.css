@@ -613,13 +613,81 @@ img { max-width: 100%; display: block; }
 .dropzone--tall { aspect-ratio: 4 / 5; }
 .dropzone--square { aspect-ratio: 1 / 1; }
 .dropzone--flavour { aspect-ratio: 4 / 5; margin-bottom: 0; }
+.event__banner-wrap {
+  position: relative;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
 .event__banner {
   display: block;
   width: 100%;
   height: auto;
-  margin-bottom: clamp(2rem, 5vw, 3rem);
   border-radius: 6px;
   box-shadow: 0 26px 40px -30px rgba(15, 14, 13, 0.4);
+}
+
+/* Sold out state: shown when the section carries the data-sold-out attribute */
+.event__stamp,
+.event__soldout,
+.event__card-soldout { display: none; }
+
+.event[data-sold-out] .event__tickets { display: none; }
+.event[data-sold-out] .event__stamp { display: block; }
+.event[data-sold-out] .event__soldout { display: block; }
+.event[data-sold-out] .event__card-soldout { display: block; }
+
+.event__stamp {
+  position: absolute;
+  right: clamp(0.75rem, 3vw, 2.25rem);
+  bottom: calc(-1 * clamp(0.9rem, 2.4vw, 1.6rem));
+  transform: rotate(-7deg);
+  padding: 0.25em 0.7em;
+  border: 3px solid var(--accent);
+  border-radius: 4px;
+  background: rgba(240, 237, 227, 0.92);
+  color: var(--accent);
+  font-weight: 900;
+  font-size: clamp(0.85rem, 2.6vw, 1.7rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.event__soldout {
+  background: var(--ice);
+  color: var(--ink);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  max-width: 46ch;
+}
+
+.event__soldout-title {
+  margin: 0 0 0.6rem;
+  font-weight: 900;
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.event__soldout-copy {
+  margin: 0 0 1.25rem;
+  line-height: 1.55;
+}
+
+.event__badge {
+  display: inline-block;
+  margin: 0.8rem 0 1rem;
+  padding: 0.35em 0.8em;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  background: var(--on-dark);
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .dropzone__input {

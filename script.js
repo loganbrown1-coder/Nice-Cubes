@@ -150,7 +150,7 @@ form.addEventListener('submit', async (e) => {
 
   if (!KLAVIYO_CONFIGURED) {
     console.warn('Klaviyo not configured yet — set KLAVIYO_COMPANY_ID and KLAVIYO_LIST_ID in script.js.');
-    setNote(note, `Thanks ${data.firstName}, you're on the list. (Klaviyo not yet connected — see script.js)`, false);
+    setNote(note, `Thanks ${data.firstName}, you're on the list. (Klaviyo not yet connected, see script.js)`, false);
     form.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
     return;
@@ -166,7 +166,7 @@ form.addEventListener('submit', async (e) => {
     inputs.forEach((el) => el.classList.remove('touched'));
   } catch (err) {
     console.error(err);
-    setNote(note, 'Something went wrong — please try again.', true);
+    setNote(note, 'Something went wrong, please try again.', true);
   } finally {
     submitBtn.disabled = false;
   }
@@ -224,7 +224,7 @@ applyForm.addEventListener('submit', async (e) => {
 
   const data = Object.fromEntries(new FormData(applyForm).entries());
   const done = () => {
-    setNote(applyNote, 'Application received. Welcome to the community — we’ll be in touch.', false);
+    setNote(applyNote, 'Application received. Welcome to the community, we’ll be in touch.', false);
     applySubmitBtn.disabled = true;
     applyForm.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
@@ -258,7 +258,7 @@ applyForm.addEventListener('submit', async (e) => {
     done();
   } catch (err) {
     console.error(err);
-    setNote(applyNote, 'Something went wrong — please try again.', true);
+    setNote(applyNote, 'Something went wrong, please try again.', true);
     applySubmitBtn.disabled = false;
   }
 });
