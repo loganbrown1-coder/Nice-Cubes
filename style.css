@@ -321,8 +321,7 @@ img { max-width: 100%; display: block; }
 .ingredient__img {
   width: 100%;
   height: auto;
-  /* transparent cutout, so the box floats on the page like the hero */
-  filter: drop-shadow(0 34px 30px rgba(15, 14, 13, 0.3));
+  /* transparent line drawing: sits straight on the page, no shadow */
 }
 
 .principles {
