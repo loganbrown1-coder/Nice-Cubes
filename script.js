@@ -169,19 +169,33 @@ document.querySelectorAll('.dropzone').forEach((zone) => {
   });
 });
 
-// --- Page router: home / buy / events / apply, driven by the URL hash ---
+// --- Page router: real addresses (/buy/, /events/, /become-a-member/), no page reload ---
+// Each page also exists as its own file (built by build_pages.py), so the address works when
+// pasted into Instagram, WhatsApp or search. Clicking around the site swaps pages instantly.
 const PAGES = ['buy', 'events', 'apply'];
+const PAGE_PATH = { buy: '/buy/', events: '/events/', apply: '/become-a-member/' };
+const PAGE_TITLE = {
+  home: 'Nice Cubes | Ice is an ingredient.',
+  buy: 'Buy Nice Cubes | Coming soon',
+  events: 'A Nice Cubes Supper | 3rd October, East London',
+  apply: 'Become a member | Nice Cubes',
+};
+
+function pageFromPath() {
+  const segment = location.pathname.replace(/index\.html$/, '').split('/').filter(Boolean).pop();
+  return PAGES.find((p) => PAGE_PATH[p] === `/${segment}/`) || null;
+}
 
 function route() {
-  const hash = location.hash.replace('#', '');
-  const page = PAGES.includes(hash) ? hash : null;
+  const page = pageFromPath();
 
   document.getElementById('page-home').hidden = !!page;
   PAGES.forEach((p) => {
     document.getElementById(`page-${p}`).hidden = p !== page;
   });
+  document.title = PAGE_TITLE[page || 'home'];
 
-  if (!page && hash === 'join') {
+  if (!page && location.hash === '#join') {
     const target = document.getElementById('join');
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   } else {
@@ -189,7 +203,37 @@ function route() {
   }
 }
 
-window.addEventListener('hashchange', route);
+// Old links like /#events still work: tidy them into the real address.
+function upgradeLegacyHash() {
+  const legacyPage = location.hash.replace('#', '');
+  if (PAGES.includes(legacyPage)) {
+    history.replaceState(null, '', PAGE_PATH[legacyPage]);
+  }
+}
+upgradeLegacyHash();
+window.addEventListener('hashchange', () => {
+  upgradeLegacyHash();
+  route();
+});
+
+// Internal links swap pages without reloading; everything else behaves normally.
+document.addEventListener('click', (e) => {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const link = e.target.closest('a[href]');
+  if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+
+  const url = new URL(link.href, location.href);
+  if (url.origin !== location.origin) return;
+  const isSitePage = url.pathname === '/' || Object.values(PAGE_PATH).includes(url.pathname);
+  if (!isSitePage) return;
+
+  e.preventDefault();
+  const target = url.pathname + url.search + url.hash;
+  if (target !== location.pathname + location.search + location.hash) history.pushState({}, '', target);
+  route();
+});
+
+window.addEventListener('popstate', route);
 route();
 
 // --- Waitlist forms -> Klaviyo ---
