@@ -5,6 +5,7 @@
   --accent: #c5341b;
   --accent-dark: #a12a15;
   --lime: #c8f902;
+  --ice: #c4dee9;
   --muted: rgba(15, 14, 13, 0.75);
   --muted-2: rgba(15, 14, 13, 0.6);
   --line: rgba(15, 14, 13, 0.14);
@@ -115,14 +116,14 @@ img { max-width: 100%; display: block; }
 .logo--nav { width: 78px; color: var(--ink); }
 .logo--footer { width: 96px; color: var(--on-dark); margin-bottom: 0.9rem; }
 
-/* Black on lime lockup */
+/* Black on ice blue lockup */
 .lockup {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 112px;
   height: 112px;
-  background: var(--lime);
+  background: var(--ice);
   color: var(--ink);
   border-radius: var(--radius);
 }
