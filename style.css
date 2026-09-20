@@ -112,9 +112,9 @@ img { max-width: 100%; display: block; }
 }
 
 /* Logo: stacked all-caps wordmark (Hanken Grotesk 900, tracking -45), one shared vector */
-.logo { display: block; height: auto; fill: currentColor; }
-.logo--nav { width: 78px; color: var(--ink); }
-.logo--footer { width: 96px; color: var(--on-dark); margin-bottom: 0.9rem; }
+.logo { display: block; height: auto; aspect-ratio: 3023 / 1637; overflow: visible; fill: currentColor; }
+.logo--nav { width: 81px; color: var(--ink); }
+.logo--footer { width: 100px; color: var(--on-dark); margin-bottom: 0.9rem; }
 
 /* Black on ice blue lockup */
 .lockup {
@@ -127,7 +127,7 @@ img { max-width: 100%; display: block; }
   color: var(--ink);
   border-radius: var(--radius);
 }
-.lockup__mark { width: 62%; height: auto; fill: currentColor; }
+.lockup__mark { width: 64.5%; height: auto; aspect-ratio: 3023 / 1637; overflow: visible; fill: currentColor; }
 
 /* Buttons */
 .btn {
@@ -194,9 +194,10 @@ img { max-width: 100%; display: block; }
   position: fixed;
   top: 14vh;
   right: -4vw;
-  width: min(960px, 72vw);
+  width: min(1000px, 75vw);
   height: auto;
-  aspect-ratio: 2903 / 1517;
+  aspect-ratio: 3023 / 1637;
+  overflow: visible;
   fill: #fff;
   mix-blend-mode: difference;
   opacity: 0.075;
@@ -694,7 +695,7 @@ img { max-width: 100%; display: block; }
 
 .member-card-wrap:hover .member-card { transform: rotate(0deg) translateY(-3px); }
 
-.member-card__logo { width: 64px; height: auto; fill: currentColor; }
+.member-card__logo { width: 66.5px; height: auto; aspect-ratio: 3023 / 1637; overflow: visible; fill: currentColor; }
 
 .member-card__tag {
   position: absolute;
@@ -923,7 +924,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; }
   .hero__media { order: -1; }
-  .bg-wordmark { width: 125vw; right: -22vw; top: 22vh; }
+  .bg-wordmark { width: 100vw; right: 0; top: 55vh; transform: translateY(-50%); }
   .ingredient { grid-template-columns: 1fr; }
   .event__layout { grid-template-columns: 1fr; }
   .apply__grid { grid-template-columns: 1fr; }
