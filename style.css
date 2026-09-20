@@ -187,8 +187,8 @@ img { max-width: 100%; display: block; }
 .hero__img {
   width: 100%;
   height: auto;
-  border-radius: var(--radius);
-  box-shadow: 0 32px 60px -28px rgba(15, 14, 13, 0.45);
+  /* transparent cutout, so the shadow follows the box itself and it floats above the wordmark */
+  filter: drop-shadow(0 34px 30px rgba(15, 14, 13, 0.3));
 }
 
 /* Waitlist */
