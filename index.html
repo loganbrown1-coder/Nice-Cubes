@@ -11,7 +11,7 @@
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<link rel="stylesheet" href="style.css?v=23">
+<link rel="stylesheet" href="style.css?v=25">
 </head>
 <body>
 
@@ -257,9 +257,30 @@
 
 <section class="apply" id="page-apply" hidden>
   <div class="apply__inner">
-    <p class="eyebrow eyebrow--center">Community</p>
+    <p class="eyebrow eyebrow--center">Community &middot; Cool people welcome</p>
     <h2 class="h2 h2--center">Become a member</h2>
     <p class="lede lede--center">Join the Nice Cubes community: first access, tastings, and a say in what we make next.</p>
+
+    <ul class="perks">
+      <li class="perk"><span class="perk__num">01</span><strong class="perk__title">First in line</strong><span class="perk__text">First access to new flavours and drops.</span></li>
+      <li class="perk"><span class="perk__num">02</span><strong class="perk__title">Taste tests</strong><span class="perk__text">Invites to tastings and events.</span></li>
+      <li class="perk"><span class="perk__num">03</span><strong class="perk__title">Your say</strong><span class="perk__text">A say in what we freeze next.</span></li>
+    </ul>
+
+    <div class="apply__grid">
+      <div class="member-card-wrap">
+        <div class="member-card" aria-hidden="true">
+          <svg class="member-card__logo" viewBox="0 0 2903 1517" focusable="false"><use href="#nc-wordmark"/></svg>
+          <span class="member-card__tag">Member</span>
+          <div class="member-card__name" id="card-name">Your name</div>
+          <div class="member-card__row">
+            <span class="member-card__label">Favourite flavour</span>
+            <strong class="member-card__value" id="card-flavour">Your pick</strong>
+          </div>
+          <div class="member-card__foot">Chilled since 2026</div>
+        </div>
+        <p class="member-card__hint">Fill in the form and watch your card come together.</p>
+      </div>
 
     <form class="form form--light" id="apply-form" novalidate>
       <div class="form__row">
@@ -298,9 +319,10 @@
       <p class="form__consent">By submitting, you agree to receive emails from Nice Cubes about the community, tastings and launches. Unsubscribe any time.</p>
       <p class="form__note" role="status" aria-live="polite"></p>
     </form>
+    </div>
   </div>
 </section>
 
-<script src="script.js?v=8"></script>
+<script src="script.js?v=9"></script>
 </body>
 </html>

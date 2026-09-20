@@ -204,6 +204,19 @@ footerForm.addEventListener('submit', async (e) => {
   }
 });
 
+// --- Live membership card: mirrors the name and favourite flavour as they are typed ---
+const cardName = document.getElementById('card-name');
+const cardFlavour = document.getElementById('card-flavour');
+
+function updateMemberCard() {
+  const f = document.getElementById('apply-form');
+  const name = `${f.firstName.value} ${f.lastName.value}`.trim().replace(/\s+/g, ' ');
+  cardName.textContent = name || 'Your name';
+  cardFlavour.textContent = f.flavour.value.trim() || 'Your pick';
+}
+
+document.getElementById('apply-form').addEventListener('input', updateMemberCard);
+
 // --- Become a Member application -> same Klaviyo list, tagged so members can be segmented ---
 // In Klaviyo, filter on the custom property "member_application" (is true), or on the
 // source "Nice Cubes membership application".
@@ -224,10 +237,11 @@ applyForm.addEventListener('submit', async (e) => {
 
   const data = Object.fromEntries(new FormData(applyForm).entries());
   const done = () => {
-    setNote(applyNote, 'Application received. Welcome to the community, we’ll be in touch.', false);
+    setNote(applyNote, 'Application received. Stay cool, we’ll be in touch.', false);
     applySubmitBtn.disabled = true;
     applyForm.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
+    updateMemberCard();
   };
 
   if (!KLAVIYO_CONFIGURED) {
