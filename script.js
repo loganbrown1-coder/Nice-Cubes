@@ -341,6 +341,31 @@ form.addEventListener('submit', async (e) => {
   }
 });
 
+// --- Free membership nudge: appears when someone clicks into the first waitlist box ---
+const memberPrompt = document.getElementById('member-prompt');
+const waitlistFirstName = document.querySelector('#waitlist-form input[name="firstName"]');
+const PROMPT_KEY = 'nc-member-prompt-dismissed';
+
+function promptDismissed() {
+  try { return sessionStorage.getItem(PROMPT_KEY) === '1'; } catch (err) { return false; }
+}
+
+function hideMemberPrompt() {
+  memberPrompt.hidden = true;
+  try { sessionStorage.setItem(PROMPT_KEY, '1'); } catch (err) { /* private mode: it just may show again */ }
+}
+
+if (memberPrompt && waitlistFirstName) {
+  waitlistFirstName.addEventListener('focus', () => {
+    if (!promptDismissed()) memberPrompt.hidden = false;
+  });
+  memberPrompt.querySelectorAll('[data-dismiss]').forEach((btn) => btn.addEventListener('click', hideMemberPrompt));
+  memberPrompt.querySelector('a').addEventListener('click', hideMemberPrompt);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !memberPrompt.hidden) hideMemberPrompt();
+  });
+}
+
 // Footer newsletter form (email only)
 const footerForm = document.getElementById('footer-form');
 const footerBtn = footerForm.querySelector('.footer__btn');

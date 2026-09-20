@@ -244,6 +244,7 @@ img { max-width: 100%; display: block; }
 }
 
 .form {
+  position: relative;
   max-width: 480px;
   margin: 0 auto;
   text-align: left;
@@ -981,3 +982,105 @@ img { max-width: 100%; display: block; }
 }
 
 .logo--footer, .lockup { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+
+/* Free membership nudge, shown when someone clicks into the waitlist form.
+   Wide screens: beside the form. Narrow screens: just above it. */
+.member-prompt {
+  position: relative;
+  margin: 0 0 1.1rem;
+  padding: 1rem 2.6rem 1.05rem 1.1rem;
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 12px;
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.65);
+  text-align: left;
+  animation: prompt-up 0.25s ease-out;
+}
+
+/* little arrow pointing up at the name fields */
+.member-prompt::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 2rem;
+  border: 9px solid transparent;
+  border-bottom-color: var(--cream);
+}
+
+/* on smaller screens the form becomes a column so the card can slot in right under the name fields */
+@media (max-width: 1099px) {
+  #waitlist-form { display: flex; flex-direction: column; }
+  #waitlist-form > * { order: 2; }
+  #waitlist-form > .form__row { order: 0; }
+  #waitlist-form > .member-prompt { order: 1; }
+}
+
+.member-prompt__tag {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.2em 0.65em;
+  border-radius: 999px;
+  background: var(--ice);
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.member-prompt__title { margin: 0 0 0.35rem; font-size: 1rem; font-weight: 900; line-height: 1.2; letter-spacing: -0.01em; }
+.member-prompt__text { display: none; margin: 0 0 0.9rem; font-size: 0.85rem; line-height: 1.45; color: var(--muted); }
+.member-prompt__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem; margin-top: 0.7rem; }
+
+.member-prompt__later {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted-2);
+  font: inherit;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.member-prompt__later:hover { color: var(--ink); }
+
+.member-prompt__close {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: none;
+  color: var(--muted-2);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.member-prompt__close:hover { color: var(--ink); }
+
+@keyframes prompt-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes prompt-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+
+@media (min-width: 1100px) {
+  .member-prompt {
+    position: absolute;
+    z-index: 5;
+    left: calc(100% + 1.5rem);
+    top: -0.35rem;
+    width: 270px;
+    margin: 0;
+    animation-name: prompt-in;
+  }
+  .member-prompt::after {
+    bottom: auto;
+    top: 1.6rem;
+    left: -18px;
+    border-color: transparent;
+    border-right-color: var(--cream);
+  }
+  .member-prompt__text { display: block; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .member-prompt { animation: none; }
+}

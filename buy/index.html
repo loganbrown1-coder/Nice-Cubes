@@ -23,7 +23,7 @@
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css?v=31">
+<link rel="stylesheet" href="/style.css?v=33">
 </head>
 <body>
 
@@ -79,6 +79,17 @@
       </label>
       <button class="btn btn--accent btn--block" type="submit">Join the Waitlist</button>
       <p class="form__note" role="status" aria-live="polite"></p>
+
+      <aside class="member-prompt" id="member-prompt" role="dialog" aria-modal="false" aria-labelledby="member-prompt-title" hidden>
+        <button class="member-prompt__close" type="button" data-dismiss aria-label="Close">&times;</button>
+        <span class="member-prompt__tag">Free</span>
+        <p class="member-prompt__title" id="member-prompt-title">Would you like to apply for your free membership?</p>
+        <p class="member-prompt__text">First access, tastings and a say in what we freeze next.</p>
+        <div class="member-prompt__actions">
+          <a class="btn btn--dark btn--sm" href="/become-a-member/">Apply for membership</a>
+          <button class="member-prompt__later" type="button" data-dismiss>Maybe later</button>
+        </div>
+      </aside>
     </form>
   </section>
 
@@ -342,6 +353,6 @@
   </div>
 </section>
 
-<script src="/script.js?v=14"></script>
+<script src="/script.js?v=15"></script>
 </body>
 </html>
