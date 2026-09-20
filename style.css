@@ -286,6 +286,14 @@ img { max-width: 100%; display: block; }
 }
 .form--light .field__input::placeholder { color: rgba(15, 14, 13, 0.4); }
 
+.form__consent {
+  margin: 0.9rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--muted-2);
+}
+
 .form__note {
   margin-top: 0.9rem;
   min-height: 1.2em;
@@ -605,8 +613,14 @@ img { max-width: 100%; display: block; }
 .dropzone--tall { aspect-ratio: 4 / 5; }
 .dropzone--square { aspect-ratio: 1 / 1; }
 .dropzone--flavour { aspect-ratio: 4 / 5; margin-bottom: 0; }
-.dropzone--banner { aspect-ratio: 3.2 / 1; margin-bottom: clamp(2rem, 5vw, 3rem); }
-.dropzone--banner .dropzone__img { object-fit: contain; background: var(--cream-alt); }
+.event__banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  border-radius: 6px;
+  box-shadow: 0 26px 40px -30px rgba(15, 14, 13, 0.4);
+}
 
 .dropzone__input {
   position: absolute;

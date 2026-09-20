@@ -83,7 +83,18 @@ function setNote(note, text, isError) {
   note.classList.toggle('form__note--error', !!isError);
 }
 
-async function subscribeToKlaviyo({ email, firstName, lastName }, source) {
+async function subscribeToKlaviyo({ email, firstName, lastName, zip, properties }, source) {
+  const profileAttributes = {
+    email,
+    first_name: firstName,
+    last_name: lastName,
+    subscriptions: {
+      email: { marketing: { consent: 'SUBSCRIBED' } },
+    },
+  };
+  if (zip) profileAttributes.location = { zip };
+  if (properties) profileAttributes.properties = properties;
+
   const res = await fetch(
     `https://a.klaviyo.com/client/subscriptions?company_id=${KLAVIYO_COMPANY_ID}`,
     {
@@ -100,14 +111,7 @@ async function subscribeToKlaviyo({ email, firstName, lastName }, source) {
             profile: {
               data: {
                 type: 'profile',
-                attributes: {
-                  email,
-                  first_name: firstName,
-                  last_name: lastName,
-                  subscriptions: {
-                    email: { marketing: { consent: 'SUBSCRIBED' } },
-                  },
-                },
+                attributes: profileAttributes,
               },
             },
           },
@@ -200,12 +204,14 @@ footerForm.addEventListener('submit', async (e) => {
   }
 });
 
-// --- Become a Member application (local only — not wired to a backend yet) ---
+// --- Become a Member application -> same Klaviyo list, tagged so members can be segmented ---
+// In Klaviyo, filter on the custom property "member_application" (is true), or on the
+// source "Nice Cubes membership application".
 const applyForm = document.getElementById('apply-form');
 const applyNote = applyForm.querySelector('.form__note');
 const applySubmitBtn = applyForm.querySelector('button[type="submit"]');
 
-applyForm.addEventListener('submit', (e) => {
+applyForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const inputs = [...applyForm.querySelectorAll('.field__input')];
@@ -217,10 +223,42 @@ applyForm.addEventListener('submit', (e) => {
   }
 
   const data = Object.fromEntries(new FormData(applyForm).entries());
-  console.log('Membership application (wire this to a real endpoint):', data);
+  const done = () => {
+    setNote(applyNote, 'Application received. Welcome to the community — we’ll be in touch.', false);
+    applySubmitBtn.disabled = true;
+    applyForm.reset();
+    inputs.forEach((el) => el.classList.remove('touched'));
+  };
 
-  setNote(applyNote, 'Application received. Welcome to the community — we’ll be in touch.', false);
+  if (!KLAVIYO_CONFIGURED) {
+    console.warn('Klaviyo not configured yet — set KLAVIYO_COMPANY_ID and KLAVIYO_LIST_ID in script.js.');
+    done();
+    return;
+  }
+
   applySubmitBtn.disabled = true;
-  applyForm.reset();
-  inputs.forEach((el) => el.classList.remove('touched'));
+  setNote(applyNote, 'Sending…', false);
+
+  try {
+    await subscribeToKlaviyo(
+      {
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        zip: data.postcode.trim(),
+        properties: {
+          member_application: true,
+          member_phone: data.phone.trim(),
+          favourite_flavour: (data.flavour || '').trim(),
+          member_suggestions: (data.suggestion || '').trim(),
+        },
+      },
+      'Nice Cubes membership application'
+    );
+    done();
+  } catch (err) {
+    console.error(err);
+    setNote(applyNote, 'Something went wrong — please try again.', true);
+    applySubmitBtn.disabled = false;
+  }
 });

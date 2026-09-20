@@ -11,7 +11,7 @@
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-<link rel="stylesheet" href="style.css?v=15">
+<link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
 
@@ -192,14 +192,7 @@
 
 <section class="event" id="page-events" hidden>
   <div class="event__inner">
-    <span class="dropzone dropzone--banner" data-hint="Nice Cubes Supper Club banner artwork">
-      <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload event banner artwork">
-      <span class="dropzone__empty">
-        <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-        <span class="dropzone__label">Drop: Nice Cubes Supper Club banner artwork</span>
-        <span class="dropzone__browse">or browse files</span>
-      </span>
-    </span>
+    <img class="event__banner" src="images/supper-club-banner.webp" alt="Nice Cubes Supper Club poster. Food by Oliver Wilson, 3rd October, 6:30 to 11pm, East London. Good drinks, better ice. Seasonal fine dining. A space worth saving." loading="lazy" decoding="async">
 
     <div class="event__layout">
       <div class="event__body">
@@ -271,11 +264,12 @@
         <textarea class="field__input field__textarea" name="suggestion" rows="4" placeholder="Suggestions for Nice Cubes"></textarea>
       </label>
       <button class="btn btn--dark btn--block" type="submit">Submit Application</button>
+      <p class="form__consent">By submitting, you agree to receive emails from Nice Cubes about the community, tastings and launches. Unsubscribe any time.</p>
       <p class="form__note" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
 
-<script src="script.js?v=6"></script>
+<script src="script.js?v=7"></script>
 </body>
 </html>
