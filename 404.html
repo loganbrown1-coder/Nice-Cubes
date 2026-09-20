@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>This page has melted | Nice Cubes</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* Self-contained on purpose: this page can be served from any path, so it links to nothing relative. */
+  :root { --cream:#f0ede3; --ink:#0f0e0d; --accent:#c5341b; --ice:#c4dee9; --line:#3b5ba7; --muted:rgba(15,14,13,.75); }
+  * { box-sizing:border-box; }
+  html, body { margin:0; }
+  body { min-height:100vh; background:var(--cream); color:var(--ink); font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  .bg-wordmark { position:fixed; top:50%; left:50%; width:min(1000px,110vw); height:auto; aspect-ratio:3023/1637; transform:translate(-50%,-50%); fill:var(--ink); opacity:.05; pointer-events:none; z-index:0; }
+  .melt { position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2rem 1.25rem 3rem; }
+  .melt__logo { position:absolute; top:1.25rem; left:clamp(1.25rem,4vw,3rem); color:var(--ink); }
+  .melt__logo svg { display:block; width:81px; height:auto; aspect-ratio:3023/1637; overflow:visible; fill:currentColor; }
+  .melt__art { width:min(520px,92vw); margin:0 0 .5rem; }
+  .melt__art svg { display:block; width:100%; height:auto; overflow:visible; }
+  .eyebrow { margin:0 0 .9rem; color:var(--accent); font-weight:700; font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; }
+  h1 { margin:0 0 1.1rem; font-weight:900; text-transform:uppercase; letter-spacing:-.03em; line-height:.95; font-size:clamp(2.5rem,8vw,4.75rem); }
+  p.copy { margin:0 0 2rem; max-width:34ch; font-size:1.1rem; line-height:1.5; color:var(--muted); }
+  .btn { display:inline-flex; align-items:center; justify-content:center; padding:.95rem 1.6rem; border-radius:2px; background:var(--ink); color:var(--cream); font-weight:700; font-size:.85rem; letter-spacing:.03em; text-transform:uppercase; text-decoration:none; transition:transform .15s ease, background .15s ease; }
+  .btn:hover { transform:translateY(-1px); background:#050403; }
+  /* the little puddle scene */
+  .drop { animation:fall 2.4s cubic-bezier(.5,0,.9,.6) infinite; transform-box:fill-box; transform-origin:center; }
+  .ripple { fill:none; stroke:var(--line); stroke-width:3; opacity:0; transform-box:fill-box; transform-origin:center; animation:ripple 2.4s ease-out infinite; }
+  .ripple--2 { animation-delay:.25s; }
+  @keyframes fall { 0% { transform:translateY(-14px) scale(.6); opacity:0; } 12% { opacity:1; } 62% { transform:translateY(46px) scale(1); opacity:1; } 68%,100% { transform:translateY(50px) scale(.2); opacity:0; } }
+  @keyframes ripple { 0%,60% { transform:scale(.2); opacity:0; } 64% { opacity:.9; } 100% { transform:scale(1.5); opacity:0; } }
+  @media (prefers-reduced-motion: reduce) { .drop, .ripple { animation:none; } .drop { opacity:1; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><path id="nc-wordmark" d="M27 715V18H187L491 509H450V18H607V715H446L144 223H184V715ZM680 715V18H837V715ZM1224 733Q1123 733 1046 687Q969 641 926 558.5Q883 476 883 366Q883 256 926 174Q969 92 1046 46Q1123 0 1224 0Q1339 0 1422 57.5Q1505 115 1541 216L1393 269Q1373 213 1329.5 181.5Q1286 150 1224 150Q1168 150 1126.5 176Q1085 202 1062.5 250Q1040 298 1040 366Q1040 434 1062.5 482.5Q1085 531 1126.5 557Q1168 583 1224 583Q1286 583 1329.5 551.5Q1373 520 1393 464L1541 517Q1505 617 1422 675Q1339 733 1224 733ZM1578 715V18H2046V158H1735V286H2031V426H1735V575H2046V715ZM341 1517Q240 1517 163 1471Q86 1425 43 1342.5Q0 1260 0 1150Q0 1040 43 958Q86 876 163 830Q240 784 341 784Q456 784 539 841.5Q622 899 658 1000L510 1053Q490 997 446.5 965.5Q403 934 341 934Q285 934 243.5 960Q202 986 179.5 1034Q157 1082 157 1150Q157 1218 179.5 1266.5Q202 1315 243.5 1341Q285 1367 341 1367Q403 1367 446.5 1335.5Q490 1304 510 1248L658 1301Q622 1401 539 1459Q456 1517 341 1517ZM965 1517Q828 1517 758.5 1450Q689 1383 689 1247V802H846V1229Q846 1277 854.5 1309Q863 1341 889 1357Q915 1373 965 1373Q1015 1373 1040.5 1357Q1066 1341 1075 1309.5Q1084 1278 1084 1231V802H1241V1242Q1241 1381 1171.5 1449Q1102 1517 965 1517ZM1308 1499V802H1568Q1675 802 1736 849Q1797 896 1797 979Q1797 1025 1779 1061Q1761 1097 1729 1120Q1784 1144 1809.5 1186.5Q1835 1229 1835 1290Q1835 1387 1773.5 1443Q1712 1499 1605 1499ZM1465 1355H1592Q1678 1355 1678 1283Q1678 1248 1655.5 1229Q1633 1210 1592 1210H1465ZM1465 1070H1568Q1602 1070 1621 1052.5Q1640 1035 1640 1004Q1640 976 1621.5 961Q1603 946 1568 946H1465ZM1881 1499V802H2349V942H2038V1070H2334V1210H2038V1359H2349V1499ZM2651 1514Q2535 1514 2461 1454Q2387 1394 2371 1294L2524 1256Q2535 1316 2569.5 1345.5Q2604 1375 2656 1375Q2682 1375 2702.5 1367Q2723 1359 2735 1343Q2747 1327 2747 1305Q2747 1285 2735 1269.5Q2723 1254 2696 1239.5Q2669 1225 2624 1208Q2553 1180 2508 1148.5Q2463 1117 2442 1076Q2421 1035 2421 982Q2421 924 2449.5 879.5Q2478 835 2529.5 809.5Q2581 784 2649 784Q2722 784 2778.5 817.5Q2835 851 2869 919L2744 995Q2725 960 2699.5 941.5Q2674 923 2644 923Q2626 923 2611 930Q2596 937 2587 949.5Q2578 962 2578 979Q2578 996 2588.5 1011Q2599 1026 2627 1041.5Q2655 1057 2705 1076Q2772 1101 2815.5 1131Q2859 1161 2881 1200.5Q2903 1240 2903 1295Q2903 1359 2871.5 1408.5Q2840 1458 2783.5 1486Q2727 1514 2651 1514Z"/></defs></svg>
+<svg class="bg-wordmark" viewBox="-60 -60 3023 1637" aria-hidden="true" focusable="false"><use href="#nc-wordmark"/></svg>
+
+<main class="melt">
+  <a class="melt__logo" href="/" aria-label="Nice Cubes home">
+    <svg viewBox="-60 -60 3023 1637" role="img" aria-label="Nice Cubes"><use href="#nc-wordmark"/></svg>
+  </a>
+
+  <div class="melt__art" role="img" aria-label="A worried little ice cube melting into a puddle">
+    <svg viewBox="0 0 520 330" fill="none" stroke="#3b5ba7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <!-- puddle -->
+      <path d="M34 268 C22 240 74 224 126 230 C154 202 236 198 276 218 C330 200 432 212 476 244 C500 264 452 300 380 300 C342 316 254 318 216 302 C152 314 48 300 34 268 Z" fill="#c4dee9"/>
+      <path d="M92 262 C120 254 150 258 172 264 M300 288 C330 292 362 290 392 282" stroke-width="3" opacity=".55"/>
+      <ellipse class="ripple" cx="232" cy="274" rx="30" ry="8"/>
+      <ellipse class="ripple ripple--2" cx="232" cy="274" rx="30" ry="8"/>
+      <!-- the melting cube -->
+      <g transform="rotate(-5 200 190)">
+        <path d="M128 152 L164 120 H266 L230 152 Z" fill="#eaf5fa"/>
+        <path d="M230 152 L266 120 V186 C266 196 256 200 248 198 L230 214 Z" fill="#dcedf5"/>
+        <path d="M128 152 H230 V220 C230 232 218 236 212 228 C206 244 190 244 186 230 C178 240 164 238 162 226 C154 234 138 232 136 222 C130 220 128 216 128 210 Z" fill="#c4dee9"/>
+        <!-- face -->
+        <circle cx="160" cy="184" r="5" fill="#3b5ba7" stroke="none"/>
+        <circle cx="198" cy="184" r="5" fill="#3b5ba7" stroke="none"/>
+        <path d="M164 205 q7 -8 14 0 t14 0" stroke-width="4"/>
+        <!-- nervous sweat drop -->
+        <path d="M250 104 c5 8 8 13 0 18 c-8 -5 -5 -10 0 -18 Z" fill="#eaf5fa" stroke-width="3"/>
+        <!-- shine -->
+        <path d="M142 162 v14 M150 162 v6" stroke="#ffffff" stroke-width="4" opacity=".9"/>
+      </g>
+      <!-- drips running into the puddle -->
+      <path d="M186 246 v18" stroke-width="4"/>
+      <path d="M156 244 v10" stroke-width="4"/>
+      <circle class="drop" cx="232" cy="212" r="6" fill="#c4dee9" stroke-width="4"/>
+    </svg>
+  </div>
+
+  <p class="eyebrow">Error 404</p>
+  <h1>This page has melted.</h1>
+  <p class="copy">Whatever was here has turned into a puddle. Let&rsquo;s get you back somewhere cold.</p>
+  <a class="btn" href="/">Back to the freezer</a>
+</main>
+
+</body>
+</html>

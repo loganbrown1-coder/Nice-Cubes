@@ -1,3 +1,128 @@
+// --- Easter eggs: ice clink + raining cubes -------------------------------------------------
+// Only the Nice Cubes logo in the menu clinks. Logo and lockups can rain cubes.
+
+// Two glassy clinks, synthesised (no audio file). "ctx" is any AudioContext so it can be tested offline.
+function scheduleClink(ctx, t0) {
+  const hit = (start, base, gain) => {
+    const master = ctx.createGain();
+    master.gain.value = gain;
+    master.connect(ctx.destination);
+
+    // inharmonic partials give the "glass" ring
+    [[1, 1, 0.55], [2.32, 0.6, 0.34], [4.25, 0.35, 0.22], [6.63, 0.2, 0.14]].forEach(([ratio, amp, decay]) => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = base * ratio;
+      g.gain.setValueAtTime(0, start);
+      g.gain.linearRampToValueAtTime(amp, start + 0.002);
+      g.gain.exponentialRampToValueAtTime(0.0001, start + decay);
+      osc.connect(g);
+      g.connect(master);
+      osc.start(start);
+      osc.stop(start + decay + 0.05);
+    });
+
+    // a tiny noise tick for the moment the cubes touch
+    const len = Math.floor(ctx.sampleRate * 0.012);
+    const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / len);
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    const hp = ctx.createBiquadFilter();
+    hp.type = 'highpass';
+    hp.frequency.value = 3500;
+    const tick = ctx.createGain();
+    tick.gain.value = 0.5;
+    src.connect(hp);
+    hp.connect(tick);
+    tick.connect(master);
+    src.start(start);
+  };
+
+  hit(t0, 1850, 0.22);
+  hit(t0 + 0.11, 2350, 0.16);
+}
+
+let clinkContext;
+function playClink() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    clinkContext = clinkContext || new AC();
+    if (clinkContext.state === 'suspended') clinkContext.resume();
+    scheduleClink(clinkContext, clinkContext.currentTime + 0.01);
+  } catch (err) {
+    // sound is a bonus, never block the click
+  }
+}
+
+// mode "burst": cubes shake out of an element and fall. mode "shower": cubes fall across the whole screen.
+function rainIce(mode, origin) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (document.querySelectorAll('.ice-bit').length > 160) return;
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const box = origin ? origin.getBoundingClientRect() : null;
+  const count = mode === 'shower' ? 56 : 28;
+
+  for (let i = 0; i < count; i++) {
+    const bit = document.createElement('span');
+    bit.className = 'ice-bit';
+    bit.setAttribute('aria-hidden', 'true');
+    const size = 8 + Math.random() * 14;
+    bit.style.width = bit.style.height = `${size}px`;
+
+    let x, y, dx, dy;
+    if (mode === 'burst' && box) {
+      x = box.left + Math.random() * box.width;
+      y = box.top + box.height / 2;
+      dx = (Math.random() - 0.5) * 240;
+      dy = vh - y + 60;
+    } else {
+      x = Math.random() * vw;
+      y = -30 - Math.random() * 120;
+      dx = (Math.random() - 0.5) * 120;
+      dy = vh + 80;
+    }
+    bit.style.left = `${x - size / 2}px`;
+    bit.style.top = `${y - size / 2}px`;
+    document.body.appendChild(bit);
+
+    const rot = (Math.random() - 0.5) * 720;
+    const duration = mode === 'shower' ? 1500 + Math.random() * 1500 : 1200 + Math.random() * 1100;
+    const delay = Math.random() * (mode === 'shower' ? 1100 : 350);
+    const anim = bit.animate(
+      [
+        { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
+        { transform: `translate(${dx * 0.45}px, ${dy * 0.3}px) rotate(${rot * 0.4}deg)`, opacity: 1, offset: 0.4 },
+        { transform: `translate(${dx}px, ${dy}px) rotate(${rot}deg)`, opacity: 0 },
+      ],
+      { duration, delay, easing: 'cubic-bezier(0.35, 0, 0.9, 0.55)', fill: 'both' }
+    );
+    const remove = () => bit.remove();
+    anim.onfinish = remove;
+    setTimeout(remove, duration + delay + 400); // safety net if the tab is in the background
+  }
+}
+
+// The menu logo: clink + a burst of ice, and it still takes you home.
+const menuLogo = document.querySelector('.nav__brand');
+if (menuLogo) {
+  menuLogo.addEventListener('click', () => {
+    playClink();
+    rainIce('burst', menuLogo.querySelector('svg') || menuLogo);
+  });
+}
+
+// Hidden extras: the footer logo and the blue lockup make it rain (no sound).
+['.logo--footer', '.lockup'].forEach((sel) => {
+  const el = document.querySelector(sel);
+  if (el) el.addEventListener('click', () => rainIce('shower'));
+});
+
 // --- Image drop zones: local-only preview so you can drag in shots as you take them ---
 document.querySelectorAll('.dropzone').forEach((zone) => {
   const input = zone.querySelector('.dropzone__input');

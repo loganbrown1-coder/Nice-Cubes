@@ -946,3 +946,17 @@ img { max-width: 100%; display: block; }
 @media (max-width: 600px) {
   .perks { grid-template-columns: 1fr; }
 }
+
+/* Raining ice cubes (easter egg) */
+.ice-bit {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 3px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, var(--ice) 60%, #a9cbdc 100%);
+  border: 1px solid rgba(59, 91, 167, 0.4);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.7), 0 2px 4px rgba(15, 14, 13, 0.15);
+  will-change: transform, opacity;
+}
+
+.logo--footer, .lockup { cursor: pointer; -webkit-tap-highlight-color: transparent; }
