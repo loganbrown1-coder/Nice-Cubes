@@ -178,20 +178,35 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 
-.hero__watermark {
-  position: absolute;
-  top: 4%;
-  right: -3%;
-  width: min(900px, 68vw);
+/* Site-wide background wordmark.
+   One fixed layer sits above every section background but below all content, so each section
+   slides over it. Blend mode "difference" keeps it a faint dark tint on light sections and a
+   faint light tint on the black ones. */
+.bg-wordmark {
+  position: fixed;
+  top: 14vh;
+  right: -4vw;
+  width: min(960px, 72vw);
   height: auto;
   aspect-ratio: 2903 / 1517;
-  fill: var(--ink);
+  fill: #fff;
+  mix-blend-mode: difference;
   opacity: 0.075;
   pointer-events: none;
   user-select: none;
-  z-index: 0;
-  will-change: transform;
+  z-index: -1;
 }
+
+/* Sections with a solid colour draw it on a layer beneath the wordmark */
+.waitlist, .flavours, .footer { position: relative; }
+.waitlist::before, .flavours::before, .footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.waitlist::before, .footer::before { background: var(--ink); }
+.flavours::before { background: var(--cream-alt); }
 
 .hero__text, .hero__media { position: relative; z-index: 1; }
 
@@ -206,7 +221,6 @@ img { max-width: 100%; display: block; }
 
 /* Waitlist */
 .waitlist {
-  background: var(--ink);
   color: var(--on-dark);
   padding: clamp(3rem, 7vw, 5rem) 1.5rem;
   text-align: center;
@@ -323,7 +337,6 @@ img { max-width: 100%; display: block; }
 
 /* Four flavours */
 .flavours {
-  background: var(--cream-alt);
   padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 4vw, 3rem);
   text-align: center;
 }
@@ -405,7 +418,6 @@ img { max-width: 100%; display: block; }
 
 /* Footer (home page only) */
 .footer {
-  background: var(--ink);
   color: var(--on-dark-muted);
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 3rem);
   display: flex;
@@ -669,7 +681,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; }
   .hero__media { order: -1; }
-  .hero__watermark { width: 118vw; right: -9%; top: 44%; opacity: 0.07; }
+  .bg-wordmark { width: 125vw; right: -22vw; top: 22vh; }
   .ingredient { grid-template-columns: 1fr; }
   .event__layout { grid-template-columns: 1fr; }
   .event__card { position: static; }

@@ -44,31 +44,6 @@ document.querySelectorAll('.dropzone').forEach((zone) => {
   });
 });
 
-// --- Hero depth: the background wordmark drifts slower than the content in front ---
-const heroWordmark = document.querySelector('.hero__watermark');
-const heroSection = document.querySelector('.hero');
-
-if (heroWordmark && heroSection && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const DRIFT = 0.35; // 0 = scrolls with the page, 1 = pinned in place
-  let queued = false;
-
-  const updateDrift = () => {
-    queued = false;
-    const y = window.scrollY;
-    if (y > heroSection.offsetHeight + 200) return;
-    heroWordmark.style.transform = `translate3d(0, ${(y * DRIFT).toFixed(1)}px, 0)`;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!queued) {
-      queued = true;
-      requestAnimationFrame(updateDrift);
-    }
-  }, { passive: true });
-
-  updateDrift();
-}
-
 // --- Page router: home / buy / events / apply, driven by the URL hash ---
 const PAGES = ['buy', 'events', 'apply'];
 
