@@ -169,18 +169,15 @@ img { max-width: 100%; display: block; }
 
 .hero__watermark {
   position: absolute;
-  top: -0.15em;
-  right: -0.05em;
-  font-weight: 900;
-  font-size: 22rem;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: var(--ink);
-  opacity: 0.04;
+  top: 4%;
+  right: -3%;
+  width: min(900px, 68vw);
+  height: auto;
+  opacity: 0.075;
   pointer-events: none;
   user-select: none;
-  white-space: nowrap;
   z-index: 0;
+  will-change: transform;
 }
 
 .hero__text, .hero__media { position: relative; z-index: 1; }
@@ -191,6 +188,7 @@ img { max-width: 100%; display: block; }
   width: 100%;
   height: auto;
   border-radius: var(--radius);
+  box-shadow: 0 32px 60px -28px rgba(15, 14, 13, 0.45);
 }
 
 /* Waitlist */
@@ -688,7 +686,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; }
   .hero__media { order: -1; }
-  .hero__watermark { display: none; }
+  .hero__watermark { width: 118vw; right: -9%; top: 44%; opacity: 0.07; }
   .ingredient { grid-template-columns: 1fr; }
   .event__layout { grid-template-columns: 1fr; }
   .event__card { position: static; }
