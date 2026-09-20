@@ -17,38 +17,38 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <!-- meta:end -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css?v=33">
+<link rel="stylesheet" href="/style.css?v=35">
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><path id="nc-wordmark" d="M27 715V18H187L491 509H450V18H607V715H446L144 223H184V715ZM680 715V18H837V715ZM1224 733Q1123 733 1046 687Q969 641 926 558.5Q883 476 883 366Q883 256 926 174Q969 92 1046 46Q1123 0 1224 0Q1339 0 1422 57.5Q1505 115 1541 216L1393 269Q1373 213 1329.5 181.5Q1286 150 1224 150Q1168 150 1126.5 176Q1085 202 1062.5 250Q1040 298 1040 366Q1040 434 1062.5 482.5Q1085 531 1126.5 557Q1168 583 1224 583Q1286 583 1329.5 551.5Q1373 520 1393 464L1541 517Q1505 617 1422 675Q1339 733 1224 733ZM1578 715V18H2046V158H1735V286H2031V426H1735V575H2046V715ZM341 1517Q240 1517 163 1471Q86 1425 43 1342.5Q0 1260 0 1150Q0 1040 43 958Q86 876 163 830Q240 784 341 784Q456 784 539 841.5Q622 899 658 1000L510 1053Q490 997 446.5 965.5Q403 934 341 934Q285 934 243.5 960Q202 986 179.5 1034Q157 1082 157 1150Q157 1218 179.5 1266.5Q202 1315 243.5 1341Q285 1367 341 1367Q403 1367 446.5 1335.5Q490 1304 510 1248L658 1301Q622 1401 539 1459Q456 1517 341 1517ZM965 1517Q828 1517 758.5 1450Q689 1383 689 1247V802H846V1229Q846 1277 854.5 1309Q863 1341 889 1357Q915 1373 965 1373Q1015 1373 1040.5 1357Q1066 1341 1075 1309.5Q1084 1278 1084 1231V802H1241V1242Q1241 1381 1171.5 1449Q1102 1517 965 1517ZM1308 1499V802H1568Q1675 802 1736 849Q1797 896 1797 979Q1797 1025 1779 1061Q1761 1097 1729 1120Q1784 1144 1809.5 1186.5Q1835 1229 1835 1290Q1835 1387 1773.5 1443Q1712 1499 1605 1499ZM1465 1355H1592Q1678 1355 1678 1283Q1678 1248 1655.5 1229Q1633 1210 1592 1210H1465ZM1465 1070H1568Q1602 1070 1621 1052.5Q1640 1035 1640 1004Q1640 976 1621.5 961Q1603 946 1568 946H1465ZM1881 1499V802H2349V942H2038V1070H2334V1210H2038V1359H2349V1499ZM2651 1514Q2535 1514 2461 1454Q2387 1394 2371 1294L2524 1256Q2535 1316 2569.5 1345.5Q2604 1375 2656 1375Q2682 1375 2702.5 1367Q2723 1359 2735 1343Q2747 1327 2747 1305Q2747 1285 2735 1269.5Q2723 1254 2696 1239.5Q2669 1225 2624 1208Q2553 1180 2508 1148.5Q2463 1117 2442 1076Q2421 1035 2421 982Q2421 924 2449.5 879.5Q2478 835 2529.5 809.5Q2581 784 2649 784Q2722 784 2778.5 817.5Q2835 851 2869 919L2744 995Q2725 960 2699.5 941.5Q2674 923 2644 923Q2626 923 2611 930Q2596 937 2587 949.5Q2578 962 2578 979Q2578 996 2588.5 1011Q2599 1026 2627 1041.5Q2655 1057 2705 1076Q2772 1101 2815.5 1131Q2859 1161 2881 1200.5Q2903 1240 2903 1295Q2903 1359 2871.5 1408.5Q2840 1458 2783.5 1486Q2727 1514 2651 1514Z"/></defs></svg>
 <svg class="bg-wordmark" viewBox="-60 -60 3023 1637" aria-hidden="true" focusable="false"><use href="#nc-wordmark"/></svg>
 
-<div class="announce">Founding batch discount for the first 200 on the list</div>
+<div class="announce"><span class="announce__long">Founding batch discount for the first 200 on the list</span><span class="announce__short">Founding batch discount: first 200</span></div>
 
-<header class="nav">
+<header class="nav" id="site-nav">
   <a class="nav__brand" href="/" aria-label="Nice Cubes home">
     <svg class="logo logo--nav" viewBox="-60 -60 3023 1637" role="img" aria-label="Nice Cubes"><use href="#nc-wordmark"/></svg>
   </a>
-  <nav class="nav__links">
+  <nav class="nav__links" id="nav-links" aria-label="Main">
     <a class="btn btn--outline btn--sm" href="/buy/">Buy Nice Cubes</a>
     <a class="btn btn--outline btn--sm" href="/events/">Nice Cubes Events</a>
     <a class="btn btn--outline btn--sm" href="/become-a-member/">Become a Member</a>
-    <a class="btn btn--accent btn--sm" href="/#join">Join the list</a>
   </nav>
+  <a class="btn btn--accent btn--sm nav__join" href="/#join">Join the list</a>
+  <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span></span><span></span></button>
 </header>
 
-<main id="page-home" hidden>
+<main id="main">
+<div id="page-home" hidden>
 
   <section class="hero">
     <div class="hero__text">
-      <p class="eyebrow">Pre&#8209;launch &middot; Four flavours</p>
+      <p class="eyebrow"><span class="nowrap">Pre-launch</span> &middot; Four flavours</p>
       <h1 class="display">Why drink ice<br>when you can<br>drink nice.</h1>
       <p class="lede">Nice Cubes treats ice as an ingredient, not an afterthought. Four flavours are launching together: bold heat, floral citrus, savoury herb, bright berry. Zero dilution regret.</p>
       <a class="btn btn--dark" href="/#join">Get Early Access</a>
@@ -77,7 +77,9 @@
         <span class="field__label">Email address</span>
         <input class="field__input" type="email" name="email" placeholder="e.g. alex@email.com" required autocomplete="email">
       </label>
+      <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="nc_confirm_url" tabindex="-1" autocomplete="off"></label></div>
       <button class="btn btn--accent btn--block" type="submit">Join the Waitlist</button>
+      <p class="form__consent form__consent--dark">By joining, you agree to receive emails from Nice Cubes about early access, launches and offers. Unsubscribe any time. Read our <a href="/privacy/">privacy policy</a>.</p>
       <p class="form__note" role="status" aria-live="polite"></p>
 
       <aside class="member-prompt" id="member-prompt" role="dialog" aria-modal="false" aria-labelledby="member-prompt-title" hidden>
@@ -194,18 +196,7 @@
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="footer__brand">
-      <svg class="logo logo--footer" viewBox="-60 -60 3023 1637" role="img" aria-label="Nice Cubes"><use href="#nc-wordmark"/></svg>
-      <p class="footer__copy">© 2026 Nice Cubes. Ice is an ingredient.</p>
-    </div>
-    <form class="footer__form" id="footer-form" novalidate>
-      <input class="footer__input" type="email" name="email" placeholder="Email address" required autocomplete="email" aria-label="Email address">
-      <button class="footer__btn" type="submit">Join</button>
-    </form>
-  </footer>
-
-</main>
+</div>
 
 <section class="subpage" id="page-buy">
   <p class="eyebrow eyebrow--center">Shop &middot; Coming soon</p>
@@ -243,7 +234,7 @@
         </ul>
 
         <p class="lede">An evening of amazing food, quality drinks and fabulous ice. We&rsquo;re bringing Nice Cubes to the world for an intimate supper, with food by Oliver Wilson and friends.</p>
-        <p class="lede">Expect a seasonal menu, long&#8209;table dining, carefully made drinks, flavoured ice, and a room full of nice people.</p>
+        <p class="lede">Expect a seasonal menu, <span class="nowrap">long-table</span> dining, carefully made drinks, flavoured ice, and a room full of nice people.</p>
         <p class="event__cue">Come playful. Bring a little spice.</p>
 
         <div class="event__tickets">
@@ -344,15 +335,80 @@
         <span class="field__label">Suggestions for Nice Cubes</span>
         <textarea class="field__input field__textarea" name="suggestion" rows="4" placeholder="Suggestions for Nice Cubes" required></textarea>
       </label>
+      <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="nc_confirm_url" tabindex="-1" autocomplete="off"></label></div>
       <p class="form__required">All fields are required.</p>
       <button class="btn btn--dark btn--block" type="submit">Submit Application</button>
-      <p class="form__consent">By submitting, you agree to receive emails from Nice Cubes about the community, tastings and launches. Unsubscribe any time.</p>
+      <p class="form__consent">By submitting, you agree to receive emails from Nice Cubes about the community, tastings and launches. Unsubscribe any time. Read our <a href="/privacy/">privacy policy</a>.</p>
       <p class="form__note" role="status" aria-live="polite"></p>
     </form>
     </div>
   </div>
 </section>
 
-<script src="/script.js?v=15"></script>
+<section class="legal" id="page-privacy" hidden>
+  <div class="legal__inner">
+    <p class="eyebrow">Legal</p>
+    <h1 class="legal__title">Privacy policy</h1>
+    <p class="legal__updated">Last updated: September 2026</p>
+    <p>This page explains what personal information Nice Cubes collects on drinknicecubes.com, why we collect it, and what your rights are. We have kept it short and in plain English.</p>
+
+    <h2>Who we are</h2>
+    <p>Nice Cubes (&ldquo;we&rdquo;, &ldquo;us&rdquo;) makes flavoured ice cubes and runs this website. If you have any questions about your information, message us on Instagram at <a href="https://ig.me/m/drinknicecubes" target="_blank" rel="noopener">@drinknicecubes</a>.</p>
+
+    <h2>What we collect and why</h2>
+    <ul>
+      <li><strong>Waitlist and newsletter signups:</strong> your first name, last name (waitlist only) and email address. We use them to send you news about early access, launches and offers, including the founding batch discount. We do this with your consent.</li>
+      <li><strong>Membership applications:</strong> your name, email address, phone number, postcode, favourite flavour and suggestions. We use them to run the Nice Cubes community, such as early access, tastings and events, to get in touch about your application, and to help us decide what to make next. We do this with your consent.</li>
+      <li><strong>Visiting the site:</strong> like any website, the company that hosts it (GitHub) receives your IP address and basic technical details when your browser loads a page. This is used to deliver the site and keep it secure.</li>
+    </ul>
+    <p>You never have to give us any of this. If you don&rsquo;t, you can still browse the whole site.</p>
+
+    <h2>Cookies and tracking</h2>
+    <p>This website doesn&rsquo;t use cookies, analytics or advertising trackers, and it doesn&rsquo;t store anything on your device. If that ever changes, we will update this page and ask for your permission where the law requires it.</p>
+
+    <h2>Who we share it with</h2>
+    <p>We use trusted services to run the site, and we don&rsquo;t sell your information.</p>
+    <ul>
+      <li><strong>Klaviyo:</strong> an email marketing service that stores your signup details and sends our emails. It may process information outside the UK, using the safeguards the law requires.</li>
+      <li><strong>GitHub:</strong> hosts this website.</li>
+    </ul>
+    <p>Our site links to other websites, such as Ticket Tailor for event tickets and Instagram. They have their own privacy policies.</p>
+
+    <h2>How long we keep it</h2>
+    <p>We keep your details for as long as you stay subscribed or are part of the community, or until you ask us to delete them. If you unsubscribe, we stop emailing you. If you would like your details removed completely, ask us.</p>
+
+    <h2>Your rights</h2>
+    <p>You can ask us to show you the information we hold about you, correct it, delete it, restrict or object to how we use it, or give you a copy to take elsewhere. You can withdraw your consent to emails at any time using the unsubscribe link in any email we send.</p>
+    <p>To use any of these rights, message us on Instagram at <a href="https://ig.me/m/drinknicecubes" target="_blank" rel="noopener">@drinknicecubes</a>. If you are unhappy with how we handle your information, you can complain to the Information Commissioner&rsquo;s Office at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy from time to time. The date at the top shows when it last changed.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__brand">
+    <svg class="logo logo--footer" viewBox="-60 -60 3023 1637" role="img" aria-label="Nice Cubes"><use href="#nc-wordmark"/></svg>
+    <p class="footer__copy">&copy; 2026 Nice Cubes. Ice is an ingredient.</p>
+  </div>
+  <div class="footer__signup">
+    <form class="footer__form" id="footer-form" novalidate>
+      <input class="footer__input" type="email" name="email" placeholder="Email address" required autocomplete="email" aria-label="Email address">
+      <button class="footer__btn" type="submit">Join</button>
+      <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="nc_confirm_url" tabindex="-1" autocomplete="off"></label></div>
+    </form>
+    <p class="footer__consent">By joining, you agree to receive emails from Nice Cubes. Unsubscribe any time. Read our <a href="/privacy/">privacy policy</a>.</p>
+    <p class="footer__note" role="status" aria-live="polite"></p>
+  </div>
+  <nav class="footer__links" aria-label="Footer">
+    <a href="https://www.instagram.com/drinknicecubes/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://ig.me/m/drinknicecubes" target="_blank" rel="noopener">Contact us</a>
+    <a href="/privacy/">Privacy policy</a>
+  </nav>
+</footer>
+
+<script src="/script.js?v=16"></script>
 </body>
 </html>

@@ -39,6 +39,12 @@ PAGES = {
         description='Join the Nice Cubes community: first access, tastings, and a say in what we make next.',
         image='/images/og-home.jpg',
     ),
+    'privacy': dict(
+        path='/privacy/', folder='privacy',
+        title='Privacy policy | Nice Cubes',
+        description='What personal information Nice Cubes collects, why, and your rights.',
+        image='/images/og-home.jpg',
+    ),
 }
 
 
@@ -72,10 +78,10 @@ home = META_RE.sub(lambda m: meta_block(PAGES['home']), source, count=1)
 (ROOT / 'index.html').write_text(home, encoding='utf-8')
 
 # 2. one folder per page: same site, that page's own meta, and that page shown first
-for key in ('buy', 'events', 'apply'):
+for key in ('buy', 'events', 'apply', 'privacy'):
     p = PAGES[key]
     page = META_RE.sub(lambda m: meta_block(p), home, count=1)
-    page, n = re.subn(r'<main id="page-home">', '<main id="page-home" hidden>', page, count=1)
+    page, n = re.subn(r'<div id="page-home">', '<div id="page-home" hidden>', page, count=1)
     assert n == 1
     page, n = re.subn(r'(<section[^>]*id="page-%s"[^>]*?) hidden>' % key, r'\1>', page, count=1)
     assert n == 1, f'could not un-hide page-{key}'
@@ -90,4 +96,4 @@ urls = ''.join(f'  <url><loc>{SITE}{p["path"]}</loc></url>\n' for p in PAGES.val
     encoding='utf-8')
 (ROOT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n', encoding='utf-8')
 
-print('built:', ', '.join(['index.html'] + [PAGES[k]['folder'] + '/index.html' for k in ('buy', 'events', 'apply')]))
+print('built:', ', '.join(['index.html'] + [PAGES[k]['folder'] + '/index.html' for k in ('buy', 'events', 'apply', 'privacy')]))

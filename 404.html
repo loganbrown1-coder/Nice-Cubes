@@ -8,11 +8,10 @@
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* Self-contained on purpose: this page can be served from any path, so it links to nothing relative. */
+  @font-face { font-family:'Hanken Grotesk'; src:url('/fonts/hanken-grotesk-latin.woff2') format('woff2'); font-weight:400 900; font-style:normal; font-display:swap; }
   :root { --cream:#f0ede3; --ink:#0f0e0d; --accent:#c5341b; --ice:#c4dee9; --line:#3b5ba7; --muted:rgba(15,14,13,.75); }
   * { box-sizing:border-box; }
   html, body { margin:0; }

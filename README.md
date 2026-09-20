@@ -5,7 +5,7 @@ Live at https://drinknicecubes.com (GitHub Pages, deployed from `main`).
 ## Editing the site
 
 `index.html` is the source of truth for every page. The Buy, Events and Become a Member pages each
-also live in their own folder (`buy/`, `events/`, `become-a-member/`) so their addresses work when
+also live in their own folder (`buy/`, `events/`, `become-a-member/`, `privacy/`) so their addresses work when
 pasted into Instagram, WhatsApp or search.
 
 After ANY change to `index.html`, run:
@@ -20,9 +20,19 @@ the files inside those folders by hand: they are overwritten.
 - `style.css`, `script.js`: styles and behaviour (menu routing, forms, easter eggs).
 - `404.html`: the "This page has melted" page.
 - `images/`: photos, illustrations, favicon and social preview images.
+- `fonts/`: Hanken Grotesk, hosted here (no calls to Google). Licence in `fonts/OFL.txt`.
 - `CNAME`: tells GitHub Pages to serve the site on drinknicecubes.com.
 
 ## Klaviyo
 
 All three forms (waitlist, footer, Become a Member) post to one Klaviyo list. The public API key and list
 ID are at the top of the forms section in `script.js`.
+
+## Privacy and contact
+
+- The privacy policy is the `page-privacy` section in `index.html`. It says the site sets no cookies and
+  stores nothing on visitors' devices. If analytics, cookies or new tools are added, update the policy first.
+- Contact is currently by Instagram message (`https://ig.me/m/drinknicecubes`). When a contact email exists, add
+  it to the footer and the privacy page.
+- Forms have a hidden trap field and a human-speed check; failed signups show a message with an Instagram
+  contact link.

@@ -169,16 +169,42 @@ document.querySelectorAll('.dropzone').forEach((zone) => {
   });
 });
 
+// --- Slim menu on phones: the links live behind a menu button ---
+const siteNav = document.getElementById('site-nav');
+const navToggle = siteNav.querySelector('.nav__toggle');
+
+function setNavOpen(open) {
+  siteNav.classList.toggle('is-open', open);
+  navToggle.setAttribute('aria-expanded', String(open));
+  navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+
+navToggle.addEventListener('click', () => setNavOpen(!siteNav.classList.contains('is-open')));
+siteNav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setNavOpen(false)));
+document.addEventListener('click', (e) => {
+  if (siteNav.classList.contains('is-open') && !siteNav.contains(e.target)) setNavOpen(false);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && siteNav.classList.contains('is-open')) {
+    setNavOpen(false);
+    navToggle.focus();
+  }
+});
+window.matchMedia('(min-width: 901px)').addEventListener('change', (m) => {
+  if (m.matches) setNavOpen(false);
+});
+
 // --- Page router: real addresses (/buy/, /events/, /become-a-member/), no page reload ---
 // Each page also exists as its own file (built by build_pages.py), so the address works when
 // pasted into Instagram, WhatsApp or search. Clicking around the site swaps pages instantly.
-const PAGES = ['buy', 'events', 'apply'];
-const PAGE_PATH = { buy: '/buy/', events: '/events/', apply: '/become-a-member/' };
+const PAGES = ['buy', 'events', 'apply', 'privacy'];
+const PAGE_PATH = { buy: '/buy/', events: '/events/', apply: '/become-a-member/', privacy: '/privacy/' };
 const PAGE_TITLE = {
   home: 'Nice Cubes | Ice is an ingredient.',
   buy: 'Buy Nice Cubes | Coming soon',
   events: 'A Nice Cubes Supper | 3rd October, East London',
   apply: 'Become a member | Nice Cubes',
+  privacy: 'Privacy policy | Nice Cubes',
 };
 
 function pageFromPath() {
@@ -194,6 +220,7 @@ function route() {
     document.getElementById(`page-${p}`).hidden = p !== page;
   });
   document.title = PAGE_TITLE[page || 'home'];
+  setNavOpen(false);
 
   if (!page && location.hash === '#join') {
     const target = document.getElementById('join');
@@ -252,6 +279,60 @@ function setNote(note, text, isError) {
   note.classList.toggle('form__note--error', !!isError);
 }
 
+// Spam protection: a hidden field only bots fill in, and a check that someone actually spent a moment
+// on the form. Bots get the normal "thanks" message so they don't adapt, but nothing is sent.
+const formFirstTouch = new WeakMap();
+document.addEventListener('focusin', (e) => {
+  const f = e.target.closest && e.target.closest('form');
+  if (f && !formFirstTouch.has(f)) formFirstTouch.set(f, Date.now());
+});
+
+function looksLikeBot(f) {
+  const trap = f.querySelector('input[name="nc_confirm_url"]');
+  if (trap && trap.value.trim() !== '') return true;
+  const touched = formFirstTouch.get(f);
+  return !touched || Date.now() - touched < 600;
+}
+
+// Tell people what went wrong and what to do next. "blocked" means the request never reached Klaviyo
+// (typically an ad-blocker or strict privacy setting).
+const CONTACT_LINK = 'https://ig.me/m/drinknicecubes';
+
+function showFailure(noteEl, err) {
+  noteEl.classList.add('form__note--error');
+  noteEl.textContent =
+    err && err.kind === 'blocked'
+      ? 'We could not save that. Some ad-blockers and privacy settings stop signups going through. Please try again, or '
+      : 'Something went wrong on our side. Please try again in a moment, or ';
+  const link = document.createElement('a');
+  link.href = CONTACT_LINK;
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.textContent = 'message us on Instagram';
+  noteEl.append(link, '.');
+}
+
+async function postSubscription(body) {
+  let res;
+  try {
+    res = await fetch(`https://a.klaviyo.com/client/subscriptions?company_id=${KLAVIYO_COMPANY_ID}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/vnd.api+json', revision: KLAVIYO_REVISION },
+      body,
+    });
+  } catch (networkError) {
+    const err = new Error('Request blocked or offline');
+    err.kind = 'blocked';
+    throw err;
+  }
+  // Klaviyo returns 202 Accepted with an empty body on success.
+  if (!res.ok) {
+    const err = new Error(`Klaviyo ${res.status}`);
+    err.kind = res.status >= 500 || res.status === 429 ? 'server' : 'rejected';
+    throw err;
+  }
+}
+
 async function subscribeToKlaviyo({ email, firstName, lastName, zip, properties }, source) {
   const profileAttributes = {
     email,
@@ -264,38 +345,23 @@ async function subscribeToKlaviyo({ email, firstName, lastName, zip, properties 
   if (zip) profileAttributes.location = { zip };
   if (properties) profileAttributes.properties = properties;
 
-  const res = await fetch(
-    `https://a.klaviyo.com/client/subscriptions?company_id=${KLAVIYO_COMPANY_ID}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/vnd.api+json',
-        revision: KLAVIYO_REVISION,
+  const body = JSON.stringify({
+    data: {
+      type: 'subscription',
+      attributes: {
+        custom_source: source,
+        profile: { data: { type: 'profile', attributes: profileAttributes } },
       },
-      body: JSON.stringify({
-        data: {
-          type: 'subscription',
-          attributes: {
-            custom_source: source,
-            profile: {
-              data: {
-                type: 'profile',
-                attributes: profileAttributes,
-              },
-            },
-          },
-          relationships: {
-            list: { data: { type: 'list', id: KLAVIYO_LIST_ID } },
-          },
-        },
-      }),
-    }
-  );
+      relationships: { list: { data: { type: 'list', id: KLAVIYO_LIST_ID } } },
+    },
+  });
 
-  // Klaviyo returns 202 Accepted with an empty body on success.
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`Klaviyo ${res.status}: ${body}`);
+  try {
+    await postSubscription(body);
+  } catch (err) {
+    if (err.kind !== 'server') throw err;
+    await new Promise((r) => setTimeout(r, 800)); // one quiet retry for a temporary hiccup
+    await postSubscription(body);
   }
 }
 
@@ -317,9 +383,8 @@ form.addEventListener('submit', async (e) => {
 
   const data = Object.fromEntries(new FormData(form).entries());
 
-  if (!KLAVIYO_CONFIGURED) {
-    console.warn('Klaviyo not configured yet — set KLAVIYO_COMPANY_ID and KLAVIYO_LIST_ID in script.js.');
-    setNote(note, `Thanks ${data.firstName}, you're on the list. (Klaviyo not yet connected, see script.js)`, false);
+  if (looksLikeBot(form) || !KLAVIYO_CONFIGURED) {
+    setNote(note, `Thanks ${data.firstName}, you're on the list.`, false);
     form.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
     return;
@@ -335,7 +400,7 @@ form.addEventListener('submit', async (e) => {
     inputs.forEach((el) => el.classList.remove('touched'));
   } catch (err) {
     console.error(err);
-    setNote(note, 'Something went wrong, please try again.', true);
+    showFailure(note, err);
   } finally {
     submitBtn.disabled = false;
   }
@@ -344,20 +409,16 @@ form.addEventListener('submit', async (e) => {
 // --- Free membership nudge: appears when someone clicks into the first waitlist box ---
 const memberPrompt = document.getElementById('member-prompt');
 const waitlistFirstName = document.querySelector('#waitlist-form input[name="firstName"]');
-const PROMPT_KEY = 'nc-member-prompt-dismissed';
-
-function promptDismissed() {
-  try { return sessionStorage.getItem(PROMPT_KEY) === '1'; } catch (err) { return false; }
-}
+let memberPromptDismissed = false; // in memory only: nothing is stored on the visitor's device
 
 function hideMemberPrompt() {
   memberPrompt.hidden = true;
-  try { sessionStorage.setItem(PROMPT_KEY, '1'); } catch (err) { /* private mode: it just may show again */ }
+  memberPromptDismissed = true;
 }
 
 if (memberPrompt && waitlistFirstName) {
   waitlistFirstName.addEventListener('focus', () => {
-    if (!promptDismissed()) memberPrompt.hidden = false;
+    if (!memberPromptDismissed) memberPrompt.hidden = false;
   });
   memberPrompt.querySelectorAll('[data-dismiss]').forEach((btn) => btn.addEventListener('click', hideMemberPrompt));
   memberPrompt.querySelector('a').addEventListener('click', hideMemberPrompt);
@@ -370,15 +431,16 @@ if (memberPrompt && waitlistFirstName) {
 const footerForm = document.getElementById('footer-form');
 const footerBtn = footerForm.querySelector('.footer__btn');
 const footerBtnDefaultLabel = footerBtn.textContent;
+const footerNote = document.querySelector('.footer__note');
 
 footerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!footerForm.checkValidity()) return;
 
   const email = new FormData(footerForm).get('email');
+  footerNote.textContent = '';
 
-  if (!KLAVIYO_CONFIGURED) {
-    console.warn('Klaviyo not configured yet — set KLAVIYO_COMPANY_ID and KLAVIYO_LIST_ID in script.js.');
+  if (looksLikeBot(footerForm) || !KLAVIYO_CONFIGURED) {
     footerBtn.textContent = "You're in";
     footerForm.reset();
     return;
@@ -392,6 +454,7 @@ footerForm.addEventListener('submit', async (e) => {
   } catch (err) {
     console.error(err);
     footerBtn.textContent = 'Try again';
+    showFailure(footerNote, err);
     setTimeout(() => { footerBtn.textContent = footerBtnDefaultLabel; }, 2500);
   } finally {
     footerBtn.disabled = false;
@@ -448,8 +511,7 @@ applyForm.addEventListener('submit', async (e) => {
     updateMemberCard();
   };
 
-  if (!KLAVIYO_CONFIGURED) {
-    console.warn('Klaviyo not configured yet — set KLAVIYO_COMPANY_ID and KLAVIYO_LIST_ID in script.js.');
+  if (looksLikeBot(applyForm) || !KLAVIYO_CONFIGURED) {
     done();
     return;
   }
@@ -476,7 +538,7 @@ applyForm.addEventListener('submit', async (e) => {
     done();
   } catch (err) {
     console.error(err);
-    setNote(applyNote, 'Something went wrong, please try again.', true);
+    showFailure(applyNote, err);
     applySubmitBtn.disabled = false;
   }
 });
