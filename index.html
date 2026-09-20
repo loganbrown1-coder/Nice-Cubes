@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 
@@ -43,7 +43,7 @@
       <a class="btn btn--dark" href="#join">Get Early Access</a>
     </div>
     <div class="hero__media">
-      <img class="hero__img" src="images/hero-lime-chilli-box.webp" alt="Nice Cubes Lime &amp; Chilli flavoured ice cubes box, with three ice cubes containing lime and chilli">
+      <img class="hero__img" src="images/hero-lime-chilli-box.webp?v=2" alt="Nice Cubes Lime &amp; Chilli flavoured ice cubes box, with three ice cubes containing lime and chilli">
     </div>
   </section>
 
@@ -92,52 +92,31 @@
     </div>
   </section>
 
-  <section class="flavours" hidden>
+  <section class="flavours">
     <h2 class="display display--sm">Four Flavours</h2>
     <p class="lede lede--center">Launching together. Each one built on two or three ingredients doing all the work.</p>
 
     <div class="flavour-grid">
       <div class="flavour-card">
-        <span class="dropzone dropzone--flavour" data-hint="chilli room no slogan.png">
-          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Chilli and Lime image">
-          <span class="dropzone__empty">
-            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-            <span class="dropzone__label">chilli room no slogan.png</span>
-            <span class="dropzone__browse">or browse files</span>
-          </span>
-        </span>
+        <img class="flavour-card__img" src="images/flavour-lime-chilli.webp?v=2" alt="Nice Cubes Lime &amp; Chilli flavoured ice cubes box, with ice cubes containing lime and chilli" loading="lazy" decoding="async">
         <div class="flavour-card__swatches">
           <span class="flavour-dot" style="background:#C5341B;"></span>
           <span class="flavour-dot" style="background:#C8F902;"></span>
         </div>
-        <div class="flavour-card__name">Chilli &amp; Lime</div>
+        <div class="flavour-card__name">Lime &amp; Chilli</div>
       </div>
 
       <div class="flavour-card">
-        <span class="dropzone dropzone--flavour" data-hint="Elderflower, mint &amp; cucumber shot">
-          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Elderflower, Mint and Cucumber image">
-          <span class="dropzone__empty">
-            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-            <span class="dropzone__label">Elderflower, mint &amp; cucumber shot</span>
-            <span class="dropzone__browse">or browse files</span>
-          </span>
-        </span>
+        <img class="flavour-card__img" src="images/flavour-cucumber-mint.webp?v=2" alt="Nice Cubes Cucumber &amp; Mint flavoured ice cubes box, with ice cubes containing cucumber and mint" loading="lazy" decoding="async">
         <div class="flavour-card__swatches">
           <span class="flavour-dot" style="background:#E9E4C9;"></span>
           <span class="flavour-dot" style="background:#7FAE86;"></span>
         </div>
-        <div class="flavour-card__name">Elderflower, Mint &amp; Cucumber</div>
+        <div class="flavour-card__name">Cucumber &amp; Mint</div>
       </div>
 
       <div class="flavour-card">
-        <span class="dropzone dropzone--flavour" data-hint="Blood orange &amp; rosemary shot">
-          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Blood Orange and Rosemary image">
-          <span class="dropzone__empty">
-            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-            <span class="dropzone__label">Blood orange &amp; rosemary shot</span>
-            <span class="dropzone__browse">or browse files</span>
-          </span>
-        </span>
+        <img class="flavour-card__img" src="images/flavour-blood-orange-rosemary.webp?v=2" alt="Nice Cubes Blood Orange &amp; Rosemary flavoured ice cubes box, with ice cubes containing blood orange and rosemary" loading="lazy" decoding="async">
         <div class="flavour-card__swatches">
           <span class="flavour-dot" style="background:#D9622B;"></span>
           <span class="flavour-dot" style="background:#4F5D3A;"></span>
@@ -146,14 +125,7 @@
       </div>
 
       <div class="flavour-card">
-        <span class="dropzone dropzone--flavour" data-hint="Raspberry, lemon &amp; basil shot">
-          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload Raspberry, Lemon and Basil image">
-          <span class="dropzone__empty">
-            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
-            <span class="dropzone__label">Raspberry, lemon &amp; basil shot</span>
-            <span class="dropzone__browse">or browse files</span>
-          </span>
-        </span>
+        <img class="flavour-card__img" src="images/flavour-raspberry-lemon-basil.webp?v=2" alt="Nice Cubes Raspberry, Lemon &amp; Basil flavoured ice cubes box, with ice cubes containing raspberry, lemon and basil" loading="lazy" decoding="async">
         <div class="flavour-card__swatches">
           <span class="flavour-dot" style="background:#C93B62;"></span>
           <span class="flavour-dot" style="background:#E9C94A;"></span>
