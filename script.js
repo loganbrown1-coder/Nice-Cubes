@@ -363,6 +363,18 @@ async function subscribeToKlaviyo({ email, firstName, lastName, zip, properties 
     await new Promise((r) => setTimeout(r, 800)); // one quiet retry for a temporary hiccup
     await postSubscription(body);
   }
+
+  trackSignup(source);
+}
+
+// Records a successful signup as an Umami goal, tagged by which form it came from. Umami may be
+// blocked by an ad-blocker or absent while testing locally, so this never breaks a real signup.
+function trackSignup(source) {
+  try {
+    if (window.umami) window.umami.track('signup', { form: source });
+  } catch (err) {
+    /* analytics is a bonus, never block on it */
+  }
 }
 
 // Main waitlist form (hero + #join section)
