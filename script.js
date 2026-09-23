@@ -381,6 +381,15 @@ function trackSignup(source) {
 const form = document.getElementById('waitlist-form');
 const note = form.querySelector('.form__note');
 const submitBtn = form.querySelector('button[type="submit"]');
+const joinFollowup = document.getElementById('join-followup');
+
+// After a successful join, nudge toward free membership instead of the "would you like to
+// apply" popup (which, if it was open, would now be sitting on top of a form that's just reset).
+function showJoinSuccess(firstName) {
+  setNote(note, `Thanks ${firstName}, you're on the list.`, false);
+  joinFollowup.hidden = false;
+  hideMemberPrompt();
+}
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -396,7 +405,7 @@ form.addEventListener('submit', async (e) => {
   const data = Object.fromEntries(new FormData(form).entries());
 
   if (looksLikeBot(form) || !KLAVIYO_CONFIGURED) {
-    setNote(note, `Thanks ${data.firstName}, you're on the list.`, false);
+    showJoinSuccess(data.firstName);
     form.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
     return;
@@ -407,7 +416,7 @@ form.addEventListener('submit', async (e) => {
 
   try {
     await subscribeToKlaviyo({ email: data.email, firstName: data.firstName, lastName: data.lastName }, 'Nice Cubes waitlist form');
-    setNote(note, `Thanks ${data.firstName}, you're on the list.`, false);
+    showJoinSuccess(data.firstName);
     form.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
   } catch (err) {

@@ -24,7 +24,7 @@
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css?v=36">
+<link rel="stylesheet" href="/style.css?v=37">
 </head>
 <body>
 
@@ -84,6 +84,13 @@
       <button class="btn btn--accent btn--block" type="submit">Join the Waitlist</button>
       <p class="form__consent form__consent--dark">By joining, you agree to receive emails from Nice Cubes about early access, launches and offers. Unsubscribe any time. Read our <a href="/privacy/">privacy policy</a>.</p>
       <p class="form__note" role="status" aria-live="polite"></p>
+
+      <div class="join-followup" id="join-followup" hidden>
+        <span class="join-followup__tag">Free</span>
+        <p class="join-followup__title">Want first access and tastings too?</p>
+        <p class="join-followup__text">Apply for free membership: first access, tastings and a say in what we freeze next.</p>
+        <a class="btn btn--dark btn--sm" href="/become-a-member/">Apply for free membership</a>
+      </div>
 
       <aside class="member-prompt" id="member-prompt" role="dialog" aria-modal="false" aria-labelledby="member-prompt-title" hidden>
         <button class="member-prompt__close" type="button" data-dismiss aria-label="Close">&times;</button>
@@ -158,6 +165,34 @@
     </div>
   </section>
 
+  <section class="member-teaser">
+    <div class="member-teaser__inner">
+      <div class="member-teaser__text">
+        <p class="eyebrow">Community &middot; Free</p>
+        <h2 class="h2">Become a member.</h2>
+        <p class="lede">No cost, just first dibs. Apply and you&rsquo;ll get first access to new flavours, invites to tastings, and a say in what we freeze next.</p>
+        <a class="btn btn--accent" href="/become-a-member/">Apply for free membership</a>
+      </div>
+      <ul class="perks member-teaser__perks">
+        <li class="perk">
+          <span class="perk__num">01</span>
+          <strong class="perk__title">First in line</strong>
+          <span class="perk__text">First access to new flavours and drops.</span>
+        </li>
+        <li class="perk">
+          <span class="perk__num">02</span>
+          <strong class="perk__title">Taste tests</strong>
+          <span class="perk__text">Invites to tastings and events.</span>
+        </li>
+        <li class="perk">
+          <span class="perk__num">03</span>
+          <strong class="perk__title">Your say</strong>
+          <span class="perk__text">A say in what we freeze next.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <section class="follow follow--simple">
     <div class="follow__head">
       <h2 class="h2">Follow along</h2>
@@ -214,7 +249,10 @@
     <span class="freezer__cube freezer__cube--setting"></span>
   </div>
   <p class="freezer__label">Nearly set</p>
-  <a class="btn btn--dark" href="/#join">Join the waitlist</a>
+  <div class="event__actions">
+    <a class="btn btn--dark" href="/#join">Join the waitlist</a>
+    <a class="btn btn--outline" href="/become-a-member/">Become a member while you wait</a>
+  </div>
 </section>
 
 <section class="event" id="page-events" data-sold-out hidden>
@@ -407,12 +445,13 @@
     <p class="footer__note" role="status" aria-live="polite"></p>
   </div>
   <nav class="footer__links" aria-label="Footer">
+    <a href="/become-a-member/">Become a Member</a>
     <a href="https://www.instagram.com/drinknicecubes/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://ig.me/m/drinknicecubes" target="_blank" rel="noopener">Contact us</a>
     <a href="/privacy/">Privacy policy</a>
   </nav>
 </footer>
 
-<script src="/script.js?v=17"></script>
+<script src="/script.js?v=18"></script>
 </body>
 </html>
