@@ -549,3 +549,27 @@ applyForm.addEventListener('submit', async (e) => {
     applySubmitBtn.disabled = false;
   }
 });
+
+// Four Flavours: each card slides into shot the first time it scrolls into view.
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  const cards = document.querySelectorAll('.flavour-card');
+  if (!cards.length) return;
+
+  cards.forEach((card) => card.classList.add('reveal'));
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.2, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  cards.forEach((card) => observer.observe(card));
+})();

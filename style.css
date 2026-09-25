@@ -470,6 +470,30 @@ img { max-width: 100%; display: block; }
   filter: drop-shadow(0 18px 16px rgba(15, 14, 13, 0.28));
 }
 
+/* Cards slide into shot the first time they scroll into view. JS adds .reveal up front, then
+   .is-visible once each card crosses the viewport threshold, so a page with JS disabled just
+   shows the grid in its normal state instead of getting stuck hidden. */
+.flavour-card.reveal {
+  opacity: 0;
+  transform: translateX(48px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.flavour-card.reveal.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.flavour-card.reveal:nth-child(2) { transition-delay: 0.1s; }
+.flavour-card.reveal:nth-child(3) { transition-delay: 0.2s; }
+.flavour-card.reveal:nth-child(4) { transition-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flavour-card.reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .flavour-card__swatches {
   display: flex;
   gap: 0.5rem;
