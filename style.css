@@ -94,7 +94,7 @@ img { max-width: 100%; display: block; }
 .announce__track {
   display: flex;
   width: max-content;
-  animation: announce-scroll 20s linear infinite;
+  animation: announce-scroll 40s linear infinite;
 }
 
 .announce:hover .announce__track,
