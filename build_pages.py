@@ -20,6 +20,12 @@ SITE = 'https://drinknicecubes.com'
 # source of truth.
 MEMBER_CAP = 100
 
+# The scrolling announcement bar. One copy is the real, readable message; the rest are identical
+# but marked aria-hidden, repeated enough times that the strip never shows a gap of bare
+# background, even on a very wide monitor. Regenerated fresh on every build, so index.html's copy
+# between the markers is only ever a display value, same as MEMBER_CAP above.
+ANNOUNCE_REPEATS = 12
+
 PAGES = {
     'home': dict(
         path='/', folder=None,
@@ -75,15 +81,29 @@ def meta_block(p):
     )
 
 
+def announce_block():
+    item = (
+        f'Become a member <span class="announce__dot">&middot;</span> '
+        f'Only <span class="member-cap">{MEMBER_CAP}</span> founding spots '
+        f'<span class="announce__dot">&middot;</span> Apply now <span class="announce__dot">&middot;</span>'
+    )
+    copies = [f'<span class="announce__item">{item}</span>']
+    copies += [f'<span class="announce__item" aria-hidden="true">{item}</span>'] * (ANNOUNCE_REPEATS - 1)
+    return '<!-- announce:start -->\n' + '\n'.join(copies) + '\n<!-- announce:end -->'
+
+
 META_RE = re.compile(r'<!-- meta:start -->.*?<!-- meta:end -->', re.S)
 CAP_RE = re.compile(r'(<span class="member-cap">)\d+(</span>)')
+ANNOUNCE_RE = re.compile(r'<!-- announce:start -->.*?<!-- announce:end -->', re.S)
 
 source = (ROOT / 'index.html').read_text(encoding='utf-8')
 assert META_RE.search(source), 'index.html is missing its meta:start / meta:end markers'
 assert CAP_RE.search(source), 'index.html is missing its <span class="member-cap">...</span>'
+assert ANNOUNCE_RE.search(source), 'index.html is missing its announce:start / announce:end markers'
 
-# 1. index.html keeps the home meta, and always shows the current MEMBER_CAP
+# 1. index.html keeps the home meta, and always shows the current MEMBER_CAP and announcement bar
 home = META_RE.sub(lambda m: meta_block(PAGES['home']), source, count=1)
+home = ANNOUNCE_RE.sub(lambda m: announce_block(), home, count=1)
 home = CAP_RE.sub(rf'\g<1>{MEMBER_CAP}\g<2>', home)
 (ROOT / 'index.html').write_text(home, encoding='utf-8')
 
