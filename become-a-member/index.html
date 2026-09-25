@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- meta:start -->
 <title>Become a member | Nice Cubes</title>
-<meta name="description" content="Join the Nice Cubes community: first access, tastings, and a say in what we make next.">
+<meta name="description" content="Nice Cubes membership is reviewed and limited. Member only suppers, new flavours before anyone else, and a vote on what we freeze next.">
 <link rel="canonical" href="https://drinknicecubes.com/become-a-member/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Nice Cubes">
 <meta property="og:title" content="Become a member | Nice Cubes">
-<meta property="og:description" content="Join the Nice Cubes community: first access, tastings, and a say in what we make next.">
+<meta property="og:description" content="Nice Cubes membership is reviewed and limited. Member only suppers, new flavours before anyone else, and a vote on what we freeze next.">
 <meta property="og:url" content="https://drinknicecubes.com/become-a-member/">
 <meta property="og:image" content="https://drinknicecubes.com/images/og-home.jpg">
 <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css?v=37">
+<link rel="stylesheet" href="/style.css?v=38">
 </head>
 <body>
 
@@ -87,21 +87,10 @@
 
       <div class="join-followup" id="join-followup" hidden>
         <span class="join-followup__tag">Free</span>
-        <p class="join-followup__title">Want first access and tastings too?</p>
-        <p class="join-followup__text">Apply for free membership: first access, tastings and a say in what we freeze next.</p>
-        <a class="btn btn--dark btn--sm" href="/become-a-member/">Apply for free membership</a>
+        <p class="join-followup__title">Fancy something the list doesn&rsquo;t get?</p>
+        <p class="join-followup__text">Apply for membership: reviewed, limited, and worth it. Member only suppers, new flavours before anyone else, and a vote on what we freeze next.</p>
+        <a class="btn btn--dark btn--sm" href="/become-a-member/">Apply for membership</a>
       </div>
-
-      <aside class="member-prompt" id="member-prompt" role="dialog" aria-modal="false" aria-labelledby="member-prompt-title" hidden>
-        <button class="member-prompt__close" type="button" data-dismiss aria-label="Close">&times;</button>
-        <span class="member-prompt__tag">Free</span>
-        <p class="member-prompt__title" id="member-prompt-title">Would you like to apply for your free membership?</p>
-        <p class="member-prompt__text">First access, tastings and a say in what we freeze next.</p>
-        <div class="member-prompt__actions">
-          <a class="btn btn--dark btn--sm" href="/become-a-member/">Apply for membership</a>
-          <button class="member-prompt__later" type="button" data-dismiss>Maybe later</button>
-        </div>
-      </aside>
     </form>
   </section>
 
@@ -168,26 +157,31 @@
   <section class="member-teaser">
     <div class="member-teaser__inner">
       <div class="member-teaser__text">
-        <p class="eyebrow">Community &middot; Free</p>
+        <p class="eyebrow">Community &middot; Selective, on purpose</p>
         <h2 class="h2">Become a member.</h2>
-        <p class="lede">No cost, just first dibs. Apply and you&rsquo;ll get first access to new flavours, invites to tastings, and a say in what we freeze next.</p>
-        <a class="btn btn--accent" href="/become-a-member/">Apply for free membership</a>
+        <p class="lede">This isn&rsquo;t the list. Membership is reviewed and limited, and it comes with what the list never gets: member only suppers, new flavours before anyone else, and a vote on what we freeze next.</p>
+        <a class="btn btn--accent" href="/become-a-member/">Apply for membership</a>
       </div>
       <ul class="perks member-teaser__perks">
         <li class="perk">
           <span class="perk__num">01</span>
-          <strong class="perk__title">First in line</strong>
-          <span class="perk__text">First access to new flavours and drops.</span>
+          <strong class="perk__title">Member suppers</strong>
+          <span class="perk__text">Invites to member only suppers and tastings.</span>
         </li>
         <li class="perk">
           <span class="perk__num">02</span>
-          <strong class="perk__title">Taste tests</strong>
-          <span class="perk__text">Invites to tastings and events.</span>
+          <strong class="perk__title">First to taste</strong>
+          <span class="perk__text">New flavours before anyone else.</span>
         </li>
         <li class="perk">
           <span class="perk__num">03</span>
-          <strong class="perk__title">Your say</strong>
-          <span class="perk__text">A say in what we freeze next.</span>
+          <strong class="perk__title">Your vote</strong>
+          <span class="perk__text">A vote on what we freeze next.</span>
+        </li>
+        <li class="perk">
+          <span class="perk__num">04</span>
+          <strong class="perk__title">Plus one</strong>
+          <span class="perk__text">Bring a guest to our public events.</span>
         </li>
       </ul>
     </div>
@@ -255,6 +249,9 @@
   </div>
 </section>
 
+<!-- To flag a future event as members only, add data-members-only to the <section class="event">
+     tag below (alongside data-sold-out if it applies). The badge and its styling already exist
+     in style.css and need no further changes. -->
 <section class="event" id="page-events" data-sold-out hidden>
   <div class="event__inner">
     <div class="event__banner-wrap">
@@ -264,7 +261,7 @@
 
     <div class="event__layout">
       <div class="event__body">
-        <p class="eyebrow">First launch event</p>
+        <p class="eyebrow">First launch event <span class="event__members-badge">Members only</span></p>
         <h1 class="display display--event">A Nice Cubes<br>Supper.</h1>
         <p class="event__tagline">Good drinks. Better ice.</p>
 
@@ -307,26 +304,70 @@
         </div>
       </aside>
     </div>
+
+    <!-- Empty until there is a first past event to show. Unhide once photos are added, so
+         members only events can show non-members what they missed. -->
+    <section class="past-events" id="past-events" hidden>
+      <h2 class="h2 h2--center">Past events</h2>
+      <p class="lede lede--center">What non members missed.</p>
+      <div class="follow__grid">
+        <span class="dropzone dropzone--square" data-hint="Photo from a past event">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload past event photo 1">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">Photo from a past event</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
+        </span>
+        <span class="dropzone dropzone--square" data-hint="Photo from a past event">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload past event photo 2">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">Photo from a past event</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
+        </span>
+        <span class="dropzone dropzone--square" data-hint="Photo from a past event">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload past event photo 3">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">Photo from a past event</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
+        </span>
+        <span class="dropzone dropzone--square" data-hint="Photo from a past event">
+          <input type="file" accept="image/*" class="dropzone__input" aria-label="Upload past event photo 4">
+          <span class="dropzone__empty">
+            <svg viewBox="0 0 24 24" class="dropzone__icon"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2ZM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5Z"/></svg>
+            <span class="dropzone__label">Photo from a past event</span>
+            <span class="dropzone__browse">or browse files</span>
+          </span>
+        </span>
+      </div>
+    </section>
   </div>
 </section>
 
 <section class="apply" id="page-apply">
   <div class="apply__inner">
-    <p class="eyebrow eyebrow--center">Community &middot; Cool people welcome</p>
+    <p class="eyebrow eyebrow--center">Community &middot; Selective, on purpose</p>
     <h2 class="h2 h2--center">Become a member</h2>
-    <p class="lede lede--center">Join the Nice Cubes community: first access, tastings, and a say in what we make next.</p>
+    <p class="lede lede--center">This isn&rsquo;t the waitlist. Membership is reviewed and limited, and it comes with what the list never gets: member only suppers, new flavours before anyone else, a vote on what we freeze next, and a plus one to our events.</p>
+    <p class="apply__notice">Founding intake: <span class="member-cap">100</span> places. We review applications every Sunday and reply to everyone.</p>
 
     <ul class="perks">
-      <li class="perk"><span class="perk__num">01</span><strong class="perk__title">First in line</strong><span class="perk__text">First access to new flavours and drops.</span></li>
-      <li class="perk"><span class="perk__num">02</span><strong class="perk__title">Taste tests</strong><span class="perk__text">Invites to tastings and events.</span></li>
-      <li class="perk"><span class="perk__num">03</span><strong class="perk__title">Your say</strong><span class="perk__text">A say in what we freeze next.</span></li>
+      <li class="perk"><span class="perk__num">01</span><strong class="perk__title">Member suppers</strong><span class="perk__text">Invites to member only suppers and tastings.</span></li>
+      <li class="perk"><span class="perk__num">02</span><strong class="perk__title">First to taste</strong><span class="perk__text">New flavours before anyone else.</span></li>
+      <li class="perk"><span class="perk__num">03</span><strong class="perk__title">Your vote</strong><span class="perk__text">A vote on what we freeze next.</span></li>
+      <li class="perk"><span class="perk__num">04</span><strong class="perk__title">Plus one</strong><span class="perk__text">Bring a guest to our public events.</span></li>
     </ul>
 
     <div class="apply__grid">
       <div class="member-card-wrap">
+        <p class="member-card__preview-label">This could be yours</p>
         <div class="member-card" aria-hidden="true">
           <svg class="member-card__logo" viewBox="-60 -60 3023 1637" focusable="false"><use href="#nc-wordmark"/></svg>
-          <span class="member-card__tag">Member</span>
+          <span class="member-card__tag">Preview</span>
           <div class="member-card__name" id="card-name">Your name</div>
           <div class="member-card__row">
             <span class="member-card__label">Favourite flavour</span>
@@ -334,7 +375,7 @@
           </div>
           <div class="member-card__foot">Chilled since 2026</div>
         </div>
-        <p class="member-card__hint">Fill in the form and watch your card come together.</p>
+        <p class="member-card__hint">Fill in the form to preview it. If you&rsquo;re accepted, the real one lands in your inbox.</p>
       </div>
 
     <form class="form form--light" id="apply-form" novalidate>
@@ -352,16 +393,6 @@
         <span class="field__label">Email address</span>
         <input class="field__input" type="email" name="email" placeholder="Email address" required autocomplete="email">
       </label>
-      <div class="form__row">
-        <label class="field">
-          <span class="field__label">Phone number</span>
-          <input class="field__input" type="tel" name="phone" placeholder="Phone number" required autocomplete="tel">
-        </label>
-        <label class="field">
-          <span class="field__label">Postcode</span>
-          <input class="field__input" type="text" name="postcode" placeholder="Postcode" required autocomplete="postal-code">
-        </label>
-      </div>
       <label class="field field--full">
         <span class="field__label">Favourite ice flavour</span>
         <select class="field__input" name="flavour" required>
@@ -373,12 +404,32 @@
         </select>
       </label>
       <label class="field field--full">
-        <span class="field__label">Suggestions for Nice Cubes</span>
-        <textarea class="field__input field__textarea" name="suggestion" rows="4" placeholder="Suggestions for Nice Cubes" required></textarea>
+        <span class="field__label">What&rsquo;s your usual drink order?</span>
+        <input class="field__input" type="text" name="drinkOrder" placeholder="e.g. Whisky, neat" autocomplete="off">
+      </label>
+      <label class="field field--full">
+        <span class="field__label">Which London bar should we know about?</span>
+        <input class="field__input" type="text" name="bar" placeholder="e.g. The place with the good playlist" autocomplete="off">
+      </label>
+      <label class="field field--full">
+        <span class="field__label">Why should you be a member?</span>
+        <input class="field__input" type="text" name="whyMember" placeholder="Go on, impress us" autocomplete="off">
+      </label>
+      <label class="field field--full">
+        <span class="field__label">Instagram handle (optional)</span>
+        <input class="field__input" type="text" name="instagram" placeholder="@yourhandle" autocomplete="off">
+      </label>
+      <label class="field field--full">
+        <span class="field__label">Invite code (optional)</span>
+        <input class="field__input" type="text" name="inviteCode" placeholder="If someone gave you one" autocomplete="off">
+      </label>
+      <label class="field field--checkbox field--full">
+        <input class="field__checkbox" type="checkbox" name="ageConfirm" value="yes" required>
+        <span class="field__checkbox-label">I&rsquo;m 18 or over</span>
       </label>
       <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="nc_confirm_url" tabindex="-1" autocomplete="off"></label></div>
-      <p class="form__required">All fields are required.</p>
-      <button class="btn btn--dark btn--block" type="submit">Submit Application</button>
+      <p class="form__required">Name, email, flavour and age confirmation are required. Everything else is optional, but it helps us choose.</p>
+      <button class="btn btn--dark btn--block" type="submit">Apply</button>
       <p class="form__consent">By submitting, you agree to receive emails from Nice Cubes about the community, tastings and launches. Unsubscribe any time. Read our <a href="/privacy/">privacy policy</a>.</p>
       <p class="form__note" role="status" aria-live="polite"></p>
     </form>
@@ -399,7 +450,7 @@
     <h2>What we collect and why</h2>
     <ul>
       <li><strong>Waitlist and newsletter signups:</strong> your first name, last name (waitlist only) and email address. We use them to send you news about early access, launches and offers, including the founding batch discount. We do this with your consent.</li>
-      <li><strong>Membership applications:</strong> your name, email address, phone number, postcode, favourite flavour and suggestions. We use them to run the Nice Cubes community, such as early access, tastings and events, to get in touch about your application, and to help us decide what to make next. We do this with your consent.</li>
+      <li><strong>Membership applications:</strong> your name, email address, favourite flavour, and, if you choose to answer, your usual drink order, a bar recommendation, why you think you should be a member, your Instagram handle, and an invite code. We also ask you to confirm you are 18 or over, since our events involve alcohol. Applications are reviewed by the founders to decide who joins. We use your details to run the Nice Cubes community, such as member events and tastings, to get in touch about your application, and to help us decide what to make next. We do this with your consent.</li>
       <li><strong>Visiting the site:</strong> like any website, the company that hosts it (GitHub) receives your IP address and basic technical details when your browser loads a page. This is used to deliver the site and keep it secure.</li>
     </ul>
     <p>You never have to give us any of this. If you don&rsquo;t, you can still browse the whole site.</p>
@@ -452,6 +503,6 @@
   </nav>
 </footer>
 
-<script src="/script.js?v=18"></script>
+<script src="/script.js?v=20"></script>
 </body>
 </html>

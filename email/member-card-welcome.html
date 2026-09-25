@@ -1,0 +1,82 @@
+<!--
+  Nice Cubes: welcome email member card
+  ======================================
+  This is NOT part of the website and is not built or deployed by build_pages.py. It is a
+  standalone, email-safe HTML block for the Klaviyo welcome flow sent to accepted members.
+
+  How to use it in Klaviyo:
+  1. Build (or open) the flow that fires when member_status is changed to your "accepted" value.
+  2. Add an email, and inside it add a "Custom HTML" content block.
+  3. Copy everything inside the <table class="nc-card-wrap"> ... </table> below (not the <html>,
+     <head> or <body> tags) and paste it into that block.
+  4. Replace the three placeholders with Klaviyo's own merge tags, using its variable picker
+     rather than typing them by hand, since the exact tag names depend on your account setup:
+       FIRST_NAME       -> the profile's first name
+       LAST_NAME        -> the profile's last name
+       FAVOURITE_FLAVOUR -> the custom profile property named favourite_flavour, which the
+                             Become a Member form on the site already sends for every applicant.
+
+  Design notes:
+  - Built with a table and inline styles throughout, since email clients (particularly Outlook
+    on Windows) do not reliably support modern CSS. Colours match the live member card on
+    drinknicecubes.com/become-a-member/.
+  - The gradient on the live site's card is simplified to a single flat colour here, since email
+    gradients render inconsistently. Rounded corners will show as square in older Outlook, which
+    is an acceptable, expected degrade.
+  - The logo is set as styled text, not an image, so the card still reads correctly for the
+    many inboxes that block images by default.
+  - Test this in Klaviyo's own preview (and ideally Litmus or a real Outlook inbox if you have
+    access) before sending, as email rendering varies more than the website does.
+-->
+<table class="nc-card-wrap" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f0ede3; padding:32px 16px;">
+  <tr>
+    <td align="center">
+      <table role="presentation" width="400" cellpadding="0" cellspacing="0" border="0" style="width:400px; max-width:100%; background-color:#c4dee9; border-radius:16px;">
+        <tr>
+          <td style="padding:28px 30px 24px 30px; font-family:Arial, Helvetica, sans-serif;">
+
+            <!-- wordmark + tag -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:20px; line-height:22px; letter-spacing:-0.5px; color:#0f0e0d; text-transform:uppercase;">
+                  NICE<br>CUBES
+                </td>
+                <td align="right" valign="top">
+                  <span style="display:inline-block; border:2px solid #0f0e0d; border-radius:999px; padding:4px 12px; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:11px; letter-spacing:1px; color:#0f0e0d; text-transform:uppercase;">Member</span>
+                </td>
+              </tr>
+            </table>
+
+            <!-- spacer -->
+            <div style="height:56px; line-height:56px; font-size:1px;">&nbsp;</div>
+
+            <!-- name -->
+            <div style="font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:26px; line-height:1; letter-spacing:-0.5px; color:#0f0e0d; text-transform:uppercase;">
+              FIRST_NAME LAST_NAME
+            </div>
+
+            <!-- favourite flavour -->
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:14px;">
+              <tr>
+                <td style="font-family:Arial, Helvetica, sans-serif; font-size:10px; font-weight:bold; letter-spacing:1.5px; color:#3a4b52; text-transform:uppercase; padding-bottom:3px;">
+                  Favourite flavour
+                </td>
+              </tr>
+              <tr>
+                <td style="font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:bold; color:#0f0e0d; text-transform:uppercase;">
+                  FAVOURITE_FLAVOUR
+                </td>
+              </tr>
+            </table>
+
+            <!-- footer -->
+            <div style="margin-top:14px; font-family:Arial, Helvetica, sans-serif; font-size:10px; font-weight:bold; letter-spacing:1.5px; color:#3a4b52; text-transform:uppercase;">
+              Chilled since 2026
+            </div>
+
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

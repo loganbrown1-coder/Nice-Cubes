@@ -14,6 +14,12 @@ import re
 ROOT = pathlib.Path(__file__).resolve().parent
 SITE = 'https://drinknicecubes.com'
 
+# The one place to change the founding membership intake. index.html carries this number inside
+# <span class="member-cap">...</span>, and the line below keeps it in sync on every build, however
+# many times you run it, so the number in index.html is only ever a display value, never the
+# source of truth.
+MEMBER_CAP = 100
+
 PAGES = {
     'home': dict(
         path='/', folder=None,
@@ -36,7 +42,7 @@ PAGES = {
     'apply': dict(
         path='/become-a-member/', folder='become-a-member',
         title='Become a member | Nice Cubes',
-        description='Join the Nice Cubes community: first access, tastings, and a say in what we make next.',
+        description='Nice Cubes membership is reviewed and limited. Member only suppers, new flavours before anyone else, and a vote on what we freeze next.',
         image='/images/og-home.jpg',
     ),
     'privacy': dict(
@@ -70,11 +76,15 @@ def meta_block(p):
 
 
 META_RE = re.compile(r'<!-- meta:start -->.*?<!-- meta:end -->', re.S)
+CAP_RE = re.compile(r'(<span class="member-cap">)\d+(</span>)')
+
 source = (ROOT / 'index.html').read_text(encoding='utf-8')
 assert META_RE.search(source), 'index.html is missing its meta:start / meta:end markers'
+assert CAP_RE.search(source), 'index.html is missing its <span class="member-cap">...</span>'
 
-# 1. index.html keeps the home meta
+# 1. index.html keeps the home meta, and always shows the current MEMBER_CAP
 home = META_RE.sub(lambda m: meta_block(PAGES['home']), source, count=1)
+home = CAP_RE.sub(rf'\g<1>{MEMBER_CAP}\g<2>', home)
 (ROOT / 'index.html').write_text(home, encoding='utf-8')
 
 # 2. one folder per page: same site, that page's own meta, and that page shown first

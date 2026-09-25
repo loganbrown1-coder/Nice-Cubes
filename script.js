@@ -383,12 +383,10 @@ const note = form.querySelector('.form__note');
 const submitBtn = form.querySelector('button[type="submit"]');
 const joinFollowup = document.getElementById('join-followup');
 
-// After a successful join, nudge toward free membership instead of the "would you like to
-// apply" popup (which, if it was open, would now be sitting on top of a form that's just reset).
+// After a successful join, nudge toward membership instead of interrupting the form itself.
 function showJoinSuccess(firstName) {
   setNote(note, `Thanks ${firstName}, you're on the list.`, false);
   joinFollowup.hidden = false;
-  hideMemberPrompt();
 }
 
 form.addEventListener('submit', async (e) => {
@@ -426,27 +424,6 @@ form.addEventListener('submit', async (e) => {
     submitBtn.disabled = false;
   }
 });
-
-// --- Free membership nudge: appears when someone clicks into the first waitlist box ---
-const memberPrompt = document.getElementById('member-prompt');
-const waitlistFirstName = document.querySelector('#waitlist-form input[name="firstName"]');
-let memberPromptDismissed = false; // in memory only: nothing is stored on the visitor's device
-
-function hideMemberPrompt() {
-  memberPrompt.hidden = true;
-  memberPromptDismissed = true;
-}
-
-if (memberPrompt && waitlistFirstName) {
-  waitlistFirstName.addEventListener('focus', () => {
-    if (!memberPromptDismissed) memberPrompt.hidden = false;
-  });
-  memberPrompt.querySelectorAll('[data-dismiss]').forEach((btn) => btn.addEventListener('click', hideMemberPrompt));
-  memberPrompt.querySelector('a').addEventListener('click', hideMemberPrompt);
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !memberPrompt.hidden) hideMemberPrompt();
-  });
-}
 
 // Footer newsletter form (email only)
 const footerForm = document.getElementById('footer-form');
@@ -501,7 +478,10 @@ document.getElementById('apply-form').addEventListener('input', (e) => {
 
 // --- Become a Member application -> same Klaviyo list, tagged so members can be segmented ---
 // In Klaviyo, filter on the custom property "member_application" (is true), or on the
-// source "Nice Cubes membership application".
+// source "Nice Cubes membership application". member_status starts as "pending"; move it to
+// "member" (or whatever you choose) by hand once an application is accepted.
+// Only name, email, flavour and age confirmation are required: the aim is hard to get in,
+// not hard to apply, so the extra questions stay optional.
 const applyForm = document.getElementById('apply-form');
 const applyNote = applyForm.querySelector('.form__note');
 const applySubmitBtn = applyForm.querySelector('button[type="submit"]');
@@ -509,15 +489,17 @@ const applySubmitBtn = applyForm.querySelector('button[type="submit"]');
 applyForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const inputs = [...applyForm.querySelectorAll('.field__input')];
+  const inputs = [...applyForm.querySelectorAll('.field__input, .field__checkbox')];
   inputs.forEach((el) => {
     el.classList.add('touched');
-    // a field of only spaces counts as empty
-    if (el.tagName !== 'SELECT') el.setCustomValidity(el.value.trim() ? '' : 'Please fill this in.');
+    // a required field of only spaces counts as empty; optional fields are left alone
+    if (el.required && el.tagName !== 'SELECT' && el.type !== 'checkbox') {
+      el.setCustomValidity(el.value.trim() ? '' : 'Please fill this in.');
+    }
   });
 
   if (!applyForm.checkValidity()) {
-    setNote(applyNote, 'Please fill in every field, with a valid email address.', true);
+    setNote(applyNote, 'Please fill in your name, email, flavour and age confirmation.', true);
     const firstBad = inputs.find((el) => !el.checkValidity());
     if (firstBad) firstBad.focus();
     return;
@@ -525,7 +507,7 @@ applyForm.addEventListener('submit', async (e) => {
 
   const data = Object.fromEntries(new FormData(applyForm).entries());
   const done = () => {
-    setNote(applyNote, 'Application received. Stay cool, we’ll be in touch.', false);
+    setNote(applyNote, 'Application received. Stay cool, we review every Sunday and you’ll hear from us either way.', false);
     applySubmitBtn.disabled = true;
     applyForm.reset();
     inputs.forEach((el) => el.classList.remove('touched'));
@@ -546,12 +528,16 @@ applyForm.addEventListener('submit', async (e) => {
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,
-        zip: data.postcode.trim(),
         properties: {
           member_application: true,
-          member_phone: data.phone.trim(),
+          member_status: 'pending',
           favourite_flavour: (data.flavour || '').trim(),
-          member_suggestions: (data.suggestion || '').trim(),
+          drink_order: (data.drinkOrder || '').trim(),
+          bar_recommendation: (data.bar || '').trim(),
+          why_member: (data.whyMember || '').trim(),
+          instagram_handle: (data.instagram || '').trim(),
+          invite_code: (data.inviteCode || '').trim(),
+          age_confirmed: Boolean(data.ageConfirm),
         },
       },
       'Nice Cubes membership application'

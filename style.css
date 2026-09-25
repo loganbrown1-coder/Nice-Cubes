@@ -260,7 +260,6 @@ img { max-width: 100%; display: block; }
 }
 
 .form {
-  position: relative;
   max-width: 480px;
   margin: 0 auto;
   text-align: left;
@@ -274,6 +273,30 @@ img { max-width: 100%; display: block; }
 
 .field { display: block; margin-bottom: 1rem; }
 .field--full { grid-column: 1 / -1; }
+
+.field--checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.field__checkbox {
+  flex-shrink: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin: 0.15rem 0 0;
+  accent-color: var(--accent);
+}
+
+.field__checkbox:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.field__checkbox:invalid.touched { outline: 2px solid #b0361a; outline-offset: 2px; }
+
+.field__checkbox-label {
+  color: var(--muted-2);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.form--light .field__checkbox-label { color: var(--ink); }
 
 .field__label {
   display: block;
@@ -685,15 +708,23 @@ img { max-width: 100%; display: block; }
 }
 
 .apply__inner { max-width: 1000px; margin: 0 auto; }
-.apply .lede { margin-bottom: 2.5rem; }
+.apply .lede { margin-bottom: 0.75rem; }
 
-/* Perks */
+.apply__notice {
+  margin: 0 0 clamp(2.5rem, 6vw, 4rem);
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted-2);
+}
+
+/* Perks: 2x2 on the Become a Member page. The home page teaser overrides this to one column. */
 .perks {
   list-style: none;
   margin: 0 0 clamp(2.5rem, 6vw, 4rem);
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
@@ -770,6 +801,16 @@ img { max-width: 100%; display: block; }
 .apply__grid .form { max-width: 520px; margin: 0; }
 
 .member-card-wrap { position: sticky; top: 7rem; }
+
+.member-card__preview-label {
+  margin: 0 0 0.75rem;
+  text-align: center;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
 
 /* Live membership card: fills in as the form is filled in */
 .member-card {
@@ -884,6 +925,22 @@ img { max-width: 100%; display: block; }
 .event[data-sold-out] .event__soldout { display: block; }
 .event[data-sold-out] .event__card-soldout { display: block; }
 
+/* Members only badge: shown when the section carries the data-members-only attribute */
+.event__members-badge {
+  display: none;
+  margin-left: 0.6rem;
+  padding: 0.2em 0.6em;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.event[data-members-only] .event__members-badge { display: inline-block; }
+
 .event__stamp {
   position: absolute;
   right: clamp(0.75rem, 3vw, 2.25rem);
@@ -945,6 +1002,16 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+
+/* Past events: empty until there is a first one to show (see the HTML comment above it) */
+.past-events {
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.past-events .lede { margin-bottom: 2rem; }
+.past-events .follow__grid { text-align: left; }
 
 .dropzone__input {
   position: absolute;
@@ -1055,108 +1122,6 @@ img { max-width: 100%; display: block; }
 }
 
 .logo--footer, .lockup { cursor: pointer; -webkit-tap-highlight-color: transparent; }
-
-/* Free membership nudge, shown when someone clicks into the waitlist form.
-   Wide screens: beside the form. Narrow screens: just above it. */
-.member-prompt {
-  position: relative;
-  margin: 0 0 1.1rem;
-  padding: 1rem 2.6rem 1.05rem 1.1rem;
-  background: var(--cream);
-  color: var(--ink);
-  border-radius: 12px;
-  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.65);
-  text-align: left;
-  animation: prompt-up 0.25s ease-out;
-}
-
-/* little arrow pointing up at the name fields */
-.member-prompt::after {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 2rem;
-  border: 9px solid transparent;
-  border-bottom-color: var(--cream);
-}
-
-/* on smaller screens the form becomes a column so the card can slot in right under the name fields */
-@media (max-width: 1099px) {
-  #waitlist-form { display: flex; flex-direction: column; }
-  #waitlist-form > * { order: 2; }
-  #waitlist-form > .form__row { order: 0; }
-  #waitlist-form > .member-prompt { order: 1; }
-}
-
-.member-prompt__tag {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-  padding: 0.2em 0.65em;
-  border-radius: 999px;
-  background: var(--ice);
-  font-size: 0.66rem;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.member-prompt__title { margin: 0 0 0.35rem; font-size: 1rem; font-weight: 900; line-height: 1.2; letter-spacing: -0.01em; }
-.member-prompt__text { display: none; margin: 0 0 0.9rem; font-size: 0.85rem; line-height: 1.45; color: var(--muted); }
-.member-prompt__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem; margin-top: 0.7rem; }
-
-.member-prompt__later {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--muted-2);
-  font: inherit;
-  font-size: 0.8rem;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.member-prompt__later:hover { color: var(--ink); }
-
-.member-prompt__close {
-  position: absolute;
-  top: 0.35rem;
-  right: 0.5rem;
-  width: 2rem;
-  height: 2rem;
-  border: 0;
-  background: none;
-  color: var(--muted-2);
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
-}
-.member-prompt__close:hover { color: var(--ink); }
-
-@keyframes prompt-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@keyframes prompt-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
-
-@media (min-width: 1100px) {
-  .member-prompt {
-    position: absolute;
-    z-index: 5;
-    left: calc(100% + 1.5rem);
-    top: -0.35rem;
-    width: 270px;
-    margin: 0;
-    animation-name: prompt-in;
-  }
-  .member-prompt::after {
-    bottom: auto;
-    top: 1.6rem;
-    left: -18px;
-    border-color: transparent;
-    border-right-color: var(--cream);
-  }
-  .member-prompt__text { display: block; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .member-prompt { animation: none; }
-}
 
 /* Small helpers */
 .nowrap { white-space: nowrap; }
