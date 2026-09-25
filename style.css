@@ -271,6 +271,24 @@ img { max-width: 100%; display: block; }
 
 .hero__text { max-width: 46ch; }
 
+/* Hero: text lines and the box rise in on load (or whenever the home page is switched back to,
+   since the SPA router just toggles [hidden] and a CSS animation restarts once an element is
+   displayed again). Pure CSS, no JS: nothing to gate beyond the reduced-motion override below. */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero__text > * { animation: hero-rise 0.7s ease both; }
+.hero__text > *:nth-child(1) { animation-delay: 0s; }
+.hero__text > *:nth-child(2) { animation-delay: 0.08s; }
+.hero__text > *:nth-child(3) { animation-delay: 0.16s; }
+.hero__text > *:nth-child(4) { animation-delay: 0.24s; }
+.hero__media { animation: hero-rise 0.8s ease 0.15s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__text > *, .hero__media { animation: none; }
+}
+
 .hero__img {
   width: 100%;
   height: auto;
@@ -445,6 +463,20 @@ img { max-width: 100%; display: block; }
 }
 
 .principles__num { color: var(--accent); font-weight: 900; font-size: 0.85rem; }
+
+/* Principles list: each line rises in as the ingredient section scrolls into view. */
+.principles li.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.principles li.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.principles li.reveal:nth-child(2) { transition-delay: 0.1s; }
+.principles li.reveal:nth-child(3) { transition-delay: 0.2s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .principles li.reveal { opacity: 1; transform: none; transition: none; }
+}
 
 /* Four flavours */
 .flavours {
@@ -818,6 +850,18 @@ img { max-width: 100%; display: block; }
 .member-teaser__perks { grid-template-columns: 1fr; margin: 0; }
 .member-teaser__perks .perk { background: var(--cream); }
 
+/* Member teaser: the whole card rises and fades in the first time it scrolls into view. */
+.member-teaser__inner.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.member-teaser__inner.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .member-teaser__inner.reveal { opacity: 1; transform: none; transition: none; }
+}
+
 /* Waitlist success follow-up: nudges toward free membership right after joining */
 .join-followup {
   position: relative;
@@ -956,6 +1000,21 @@ img { max-width: 100%; display: block; }
 
 .dropzone:hover { border-color: var(--accent); }
 .dropzone.is-dragover { border-color: var(--accent); background: #ded5b8; }
+
+/* Past events photos: each one rises in, staggered, the first time the grid scrolls into view. */
+.dropzone.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.dropzone.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.dropzone.reveal:nth-child(2) { transition-delay: 0.1s; }
+.dropzone.reveal:nth-child(3) { transition-delay: 0.2s; }
+.dropzone.reveal:nth-child(4) { transition-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dropzone.reveal { opacity: 1; transform: none; transition: border-color 0.15s ease, background 0.15s ease; }
+}
 
 .dropzone--tall { aspect-ratio: 4 / 5; }
 .dropzone--square { aspect-ratio: 1 / 1; }

@@ -550,26 +550,34 @@ applyForm.addEventListener('submit', async (e) => {
   }
 });
 
-// Four Flavours: each card slides into shot the first time it scrolls into view.
+// Scroll reveal: adds .reveal up front then .is-visible the first time each element scrolls
+// into view (once each). Skipped entirely for reduced motion or missing IntersectionObserver
+// support, and for a page where JS never runs, so elements just show in their normal state.
 (function () {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!('IntersectionObserver' in window)) return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canObserve = 'IntersectionObserver' in window;
 
-  const cards = document.querySelectorAll('.flavour-card');
-  if (!cards.length) return;
+  function initScrollReveal(elements) {
+    if (reduceMotion || !canObserve || !elements.length) return;
 
-  cards.forEach((card) => card.classList.add('reveal'));
+    elements.forEach((el) => el.classList.add('reveal'));
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.2, rootMargin: '0px 0px -40px 0px' }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -40px 0px' }
+    );
 
-  cards.forEach((card) => observer.observe(card));
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  initScrollReveal(document.querySelectorAll('.flavour-card'));
+  initScrollReveal(document.querySelectorAll('.principles li'));
+  initScrollReveal(document.querySelectorAll('.member-teaser__inner'));
+  initScrollReveal(document.querySelectorAll('#past-events .dropzone'));
 })();
